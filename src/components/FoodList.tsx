@@ -41,27 +41,29 @@ export default function FoodList() {
   return (
     <section>
       {data && <FoodItem data={data} />}
-      <ul className='flex justify-center'>
+
+      <ul className='flex justify-center mb-10'>
         <li>
         <button onClick={() => {
             startIdx.current = startIdx.current - 1;
             console.log(startIdx.current);
             setState(startIdx.current);
             }}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+              className="w-6 h-6 text-[#536F7D] hover:scale-125 transition duration-200">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
             </svg>
-
           </button>
         </li>
-        <li>{startIdx.current}</li>
+        <li className='text-[#536F7D] mx-5'>{startIdx.current}</li>
         <li>
           <button onClick={() => {
             startIdx.current = startIdx.current + 1;
             console.log(startIdx.current);
             setState(startIdx.current);
             }}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+              className="w-6 h-6 text-[#536F7D] hover:scale-125 transition duration-200">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
             </svg>
           </button>
