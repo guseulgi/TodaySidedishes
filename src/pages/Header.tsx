@@ -39,7 +39,7 @@ export default function Header() {
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             className="md:hidden w-8 h-8 text-[#7B8F9E] 
             cursor-pointer my-auto  transition ease-in-out duration-500 
-            hover:scale-110 hover:bg-[#536F7D]">
+            hover:scale-110 hover:text-[#536F7D]">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </div>

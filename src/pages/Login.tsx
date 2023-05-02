@@ -12,8 +12,8 @@ export default function Login() {
         {/* <img src='./images/source/fryingpan.png'
           className='hidden lg:block absolute top-8 rotate-45
           right-[-320px] z-[-1]' /> */}
-        <h2 className='text-center mt-10 lg:mt-20 font-bold
-          text-[#536F7D]'>오늘도 신나게 쿠킹! 🍾</h2>
+        <h5 className='text-center mt-10 lg:mt-20 text-2xl
+          text-[#536F7D]'>오늘도 신나게 쿠킹! 🍾</h5>
         <input type='text' placeholder='아이디 입력' 
           className='block w-3/4 lg:w-3/5 h-8 mx-auto mt-12 py-5 px-2
           rounded-md border-b-2 border-[#544D42] outline-none
