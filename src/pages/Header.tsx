@@ -15,8 +15,9 @@ export default function Header() {
         </div>
         <div className='hidden md:block w-54'></div>
         <div className='ml-auto mr-5 my-auto relative'>
-          <input type="text" placeholder='요리 뭐하지?' className='p-1 pl-3 pr-8
-          border border-[#7B8F9E] outline-none rounded-sm lg:pr-14' 
+          <input type="text" className='p-1 pl-3
+          border border-[#7B8F9E] outline-none rounded-sm 
+          transition duration-500 w-10 focus:w-48' 
           ref={inputRef} />
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
             className="w-6 h-6 text-[#544D42] absolute top-1 right-2 
