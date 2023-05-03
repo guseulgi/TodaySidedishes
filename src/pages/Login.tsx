@@ -9,9 +9,6 @@ export default function Login() {
       lg:block bg-fixed bg-repeat'/>
       <div className='flex flex-col align-middle w-8/12 md:w-5/12 h-4/6 my-20 mx-auto
         lg:rounded-full bg-white drop-shadow-lg'>
-        {/* <img src='./images/source/fryingpan.png'
-          className='hidden lg:block absolute top-8 rotate-45
-          right-[-320px] z-[-1]' /> */}
         <h5 className='text-center mt-10 lg:mt-20 text-2xl
           text-[#536F7D]'>오늘도 신나게 쿠킹! 🍾</h5>
         <input type='text' placeholder='아이디 입력' 

@@ -3,6 +3,8 @@ import FoodItem from './FoodItem'
 import { fetchData } from '../utils/types';
 import axios from 'axios';
 import Loading from '../pages/Loading';
+import Sharemark from './Sharemark';
+import NotData from '../pages/NotData';
 
 export default function FoodList() {
   const curIdx = 0;
@@ -36,11 +38,14 @@ export default function FoodList() {
   }, [startIdx, state]);
 
   if(loading) return <Loading />;
-  if(!data) return <div>데이터를 불러들이지 못하였습니다.</div>;
+  
+  // 데이터 불러오기에 실패했을 때
+  if(!data) return <NotData />;
 
   return (
     <section>
       {data && <FoodItem data={data} />}
+      <Sharemark />
 
       <ul className='flex justify-center mb-10'>
         <li>
