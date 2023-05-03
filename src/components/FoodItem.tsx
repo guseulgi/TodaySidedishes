@@ -5,7 +5,7 @@ import Typemark from './Typemark';
 
 export default function FoodItem({data}:{data:fetchBasicData}) {
 
-  return (
+    return (
     <article className='h-full md:flex justify-between w-[85vw] mx-auto
     border-b-2 mb-5'>
       <div className='select-none my-12 '>
@@ -17,9 +17,13 @@ export default function FoodItem({data}:{data:fetchBasicData}) {
         <p className='ml-12 my-4 text-lg w-5/6 md:w-4/6'>{data?.SUMRY}</p>
       </div>
       <ul className='md:w-2/6 w-full md:my-12 my-4 flex justify-between md:block'>
-        <li className='md:my-2 my-auto'>
+        <li className='md:my-2 my-auto flex'>
           <Typemark type={data?.NATION_NM} />
-          {data?.PC_NM}
+          <span className='hidden md:block  my-auto text-sm mr-1'>{data?.PC_NM}</span>
+          {data?.PC_NM && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+            className="w-3 h-3 my-auto hidden md:block">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+          </svg>}
         </li>
         <li className='my-2 flex leading-10 text-[#536F7D]'>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 

@@ -39,7 +39,7 @@ export default function Typemark({type}:{type:string}) {
 
   return (
     <div className='inline-block px-4 py-1 rounded-lg text-white
-    bg-[#536F7D]'
+    bg-[#536F7D] mr-4'
       ref={divRef}>
       {typeTxt}
     </div>

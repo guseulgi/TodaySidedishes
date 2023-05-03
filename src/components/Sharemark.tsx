@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Sharemark() {
   return (
-    <ul className='flex justify-center my-10'>
+    <ul className='flex justify-center my-6'>
       <li className='w-14 h-14 rounded-full bg-[#544D42] mr-7'>
         <button>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
