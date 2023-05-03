@@ -3,7 +3,8 @@ import React from 'react'
 export default function Signup() {
   return (
     <div>
-      {/* 아이디 비밀번호 본명 주소 성별 번호 이메일 */}
+      {/* 비밀번호 닉네임 이메일 */}
+      <h3 className='font-main text-2xl'>회원가입</h3>
     </div>
   )
 }

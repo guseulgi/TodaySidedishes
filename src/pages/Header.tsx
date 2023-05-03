@@ -38,17 +38,17 @@ export default function Header() {
         </div>
         <div className='hidden md:block flex-1 flex-shrink-0 ml-5 my-auto'>
           <ul className='flex text-center'>
-            <li className='text-[#544D42] text-2xl font-subMain
+            <li className='text-[#544D42] text-[1.4rem] font-subMain
               w-8/12 h-full cursor-pointer hover:scale-110 transition
               duration-200'>
               <Link to='/info'>Kitchen's?</Link>
             </li>
-            <li className='text-[#544D42] text-2xl font-subMain
+            <li className='text-[#544D42] text-[1.4rem] font-subMain
               w-8/12 h-full cursor-pointer hover:scale-110 transition
               duration-200'>
               <Link to='/recomand'>오늘의 추천</Link>
             </li>
-            <li className='text-[#544D42] text-2xl font-subMain
+            <li className='text-[#544D42] text-[1.4rem] font-subMain
               w-8/12 h-full cursor-pointer hover:scale-110 transition
               duration-200'>
               <Link to='/contact'>Contact</Link>
@@ -94,20 +94,28 @@ export default function Header() {
               <li className='py-4 hover:bg-[#e7e2d3] hover:underline
                 hover:font-bold transition duration-100 font-subMain text-[1.2rem]
                 text-[#544D42]'>
-                  로그인
+                <Link to='/login'>로그인</Link>
               </li>
               <li className='py-4 hover:bg-[#e7e2d3] hover:underline
                 hover:font-bold transition duration-100 font-subMain text-[1.2rem]
-                text-[#544D42]'>회원가입</li>
+                text-[#544D42]'>
+                <Link to='/login/signup'>회원가입</Link>
+              </li>
               <li className='py-4 hover:bg-[#e7e2d3] hover:underline
                 hover:font-bold transition duration-100 font-subMain text-[1.2rem]
-                text-[#544D42]'>Kitchen's?</li>
+                text-[#544D42]'>
+                <Link to='/info'>Kitchen's?</Link>
+              </li>
               <li className='py-4 hover:bg-[#e7e2d3] hover:underline
                 hover:font-bold transition duration-100 font-subMain text-[1.2rem]
-                text-[#544D42]'>오늘의 추천</li>
+                text-[#544D42]'>
+                <Link to='/recomand'>오늘의 추천</Link>
+              </li>
               <li className='py-4 hover:bg-[#e7e2d3] hover:underline
                 hover:font-bold transition duration-100 font-subMain text-[1.2rem]
-                text-[#544D42]'>Contact</li>
+                text-[#544D42]'>
+                <Link to='/contact'>Contact</Link>
+              </li>
             </ul>
           </div>
         </div>

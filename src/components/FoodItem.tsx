@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { fetchData } from '../utils/types'
+import { fetchBasicData } from '../utils/types'
 import Bookmark from './Bookmark';
 import Typemark from './Typemark';
 
-export default function FoodItem({data}:{data:fetchData}) {
+export default function FoodItem({data}:{data:fetchBasicData}) {
 
   return (
     <article className='h-full md:flex justify-between w-[85vw] mx-auto

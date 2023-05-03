@@ -8,6 +8,8 @@ import Signup from './pages/Signup';
 import Info from './pages/Info';
 import Recomand from './pages/Recomand';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
+import Find from './pages/Find';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/login' element={<Login />} />
         <Route path='/login/signup' element={<Signup />} />
+        <Route path='/login/find' element={<Find />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
     </>

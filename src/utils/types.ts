@@ -1,4 +1,4 @@
-export interface fetchData {
+export interface fetchBasicData {
   ROW_NUM: number,
   RECIPE_ID : number,
   RECIPE_NM_KO : string,
@@ -30,3 +30,20 @@ LEVEL_NM 난이도
 IRDNT_CODE 재료별 분류명
 PC_NM 가격별 분류
 */
+
+// RECIPE_ID	레시피 코드
+// IRDNT_SN	재료순번
+// IRDNT_NM	재료명
+// IRDNT_CPCTY	재료용량
+// IRDNT_TY_CODE	재료타입 코드
+// IRDNT_TY_NM	재료타입명
+
+export interface fetchIngredientData {
+  ROW_NUM: number,
+  RECIPE_ID : number,
+  IRDNT_SN? : number,
+  IRDNT_NM :string,
+  IRDNT_CPCTY : string,
+  IRDNT_TY_CODE? : string,
+  IRDNT_TY_NM : string,
+}

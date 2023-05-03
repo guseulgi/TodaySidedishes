@@ -1,32 +1,58 @@
 import React, { useEffect, useRef, useState } from 'react'
 import FoodItem from './FoodItem'
-import { fetchData } from '../utils/types';
+import { fetchBasicData, fetchIngredientData } from '../utils/types';
 import axios from 'axios';
 import Loading from '../pages/Loading';
 import Sharemark from './Sharemark';
 import NotData from '../pages/NotData';
+import FoodIRDNT from './FoodIRDNT';
 
 export default function FoodList() {
   const curIdx = 0;
-  const startIdx = useRef<number>(1);
+  const randomReceipeNum = Math.floor(Math.random() * 85);
+
+  const startIdx = useRef<number>(randomReceipeNum);
   const [state, setState] = useState<number>(startIdx.current);
   const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] = useState<fetchData>();
+
+  const [basicData, setBasicData] = useState<fetchBasicData>();
+  const [ingredientData, setIngredientData] = useState<fetchIngredientData[]>();
+
+  const filterArr = useRef<Array<fetchIngredientData>>([]);
 
   useEffect(() => {
     setLoading(true);
 
     const fetchData = async() => {
-      const API_KEY = 'eb5684d0603863f163940fcf86a3d017401a1b80b6db1bd04a2a38b84e272700';
+      const basicGrid = process.env.REACT_APP_BASIC_GRID_NUM;
+      const ingredientGrid = process.env.REACT_APP_INGREDIENT_GRID_NUM;
 
-      const GridNum = 'Grid_20150827000000000226_1';
-      const url = `/openapi/${API_KEY}/json/${GridNum}/${startIdx.current}/${startIdx.current + 1}`;
+      const basicUrl = `/openapi/${process.env.REACT_APP_API_KEY}/json/${basicGrid}/${startIdx.current}/${startIdx.current + 1}`;
+      const ingredientUrl = `/openapi/${process.env.REACT_APP_API_KEY}/json/${ingredientGrid}/1/999`;
 
       try {
-        const result = await axios.get(url,{
+        const result = await axios.get(basicUrl,{
           withCredentials : true,
         });
-        setData(result.data[GridNum].row[curIdx]);
+
+        const resultSec = await axios.get(ingredientUrl, {
+          withCredentials: true,
+        });
+        
+// 기본 정보 불러오기
+        if(basicGrid !== undefined){
+          setBasicData(result.data[basicGrid].row[curIdx]);
+        }
+        
+// 재료 정보 불러오기
+        if(ingredientGrid !== undefined){
+          filterArr.current = resultSec.data[ingredientGrid].row.filter((el :any) => el.RECIPE_ID === startIdx.current);
+          console.log(filterArr);
+          setIngredientData(filterArr.current);
+        }
+
+// 과정 정보 불러오기 TODO
+
       } catch(err) {
         console.log(err);
         throw err;
@@ -40,12 +66,13 @@ export default function FoodList() {
   if(loading) return <Loading />;
   
   // 데이터 불러오기에 실패했을 때
-  if(!data) return <NotData />;
+  if(!basicData) return <NotData />;
 
   return (
     <section>
-      {data && <FoodItem data={data} />}
+      {basicData && <FoodItem data={basicData} />}
       <Sharemark />
+      {ingredientData && <FoodIRDNT data={filterArr.current}/>}
 
       <ul className='flex justify-center mb-10'>
         <li>
@@ -60,7 +87,9 @@ export default function FoodList() {
             </svg>
           </button>
         </li>
-        <li className='text-[#536F7D] mx-5'>{startIdx.current}</li>
+        <li className='text-[#536F7D] mx-5'>
+          {startIdx.current}
+        </li>
         <li>
           <button onClick={() => {
             startIdx.current = startIdx.current + 1;
