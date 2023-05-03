@@ -8,6 +8,7 @@ module.exports = {
     fontFamily: {
       main: ['CWDangamAsac-Bold'],
       subMain: ['establishRoomNo703OTF'],
+      subMainSec: ['KyoboHandwriting2021sjy'],
     },
   },
   variants: {

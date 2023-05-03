@@ -19,6 +19,7 @@ export default function FoodItem({data}:{data:fetchBasicData}) {
       <ul className='md:w-2/6 w-full md:my-12 my-4 flex justify-between md:block'>
         <li className='md:my-2 my-auto'>
           <Typemark type={data?.NATION_NM} />
+          {data?.PC_NM}
         </li>
         <li className='my-2 flex leading-10 text-[#536F7D]'>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 

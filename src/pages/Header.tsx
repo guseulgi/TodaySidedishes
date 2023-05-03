@@ -88,7 +88,8 @@ export default function Header() {
           <div className='invisible absolute right-0 top-16 bg-[#F2EFE7] w-1/4
             before:absolute before:right-2 before:top-[-6px] before:w-4 before:h-4
             before:bg-[#F2EFE7] before:z-[-1] before:rotate-45
-            transition duration-300 border border-[#e7e2d3]'
+            transition duration-300 border border-[#e7e2d3]
+            z-10'
             ref={mMenuRef}>
             <ul className='text-center cursor-pointer select-none'>
               <li className='py-4 hover:bg-[#e7e2d3] hover:underline
