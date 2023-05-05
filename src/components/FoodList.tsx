@@ -17,8 +17,6 @@ export default function FoodList() {
   const [ingredient, setIngredient] = useRecoilState(ingredientData);
   const [recipe, setRecipe] = useRecoilState(recipeData);
 
-  const idx = Math.floor(Math.random() * 85);
-  // const [index, setIndex] = useState<number>(idx);
   const index = useRecoilValue(curIndex);
 
   useEffect(() => {

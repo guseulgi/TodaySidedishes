@@ -7,13 +7,14 @@ export default function FoodRecipe({idx} :{idx:number}) {
   const recipeRowData = useRecoilValue(recipeData);
   const recipe = recipeRowData.filter((el :fetchRecipeData) => el.RECIPE_ID === idx);
 
-  const basicRecipe :fetchBasicData | any = useRecoilValue(basicData).find((el :fetchBasicData) => el.RECIPE_ID === idx);
+  const basic = useRecoilValue(basicData);
+  const curData :fetchBasicData = basic[idx - 1];
 
   return (
     <div className='my-16'>
       <h2 className='font-subMain text-5xl text-center
         mb-10 text-[#323e44]'>
-        {basicRecipe.RECIPE_NM_KO}{', 한번 만들어볼까요?'}
+        {curData?.RECIPE_NM_KO}{', 한번 만들어볼까요?'}
       </h2>
 
       {recipe.map((el: fetchRecipeData) => {
