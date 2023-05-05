@@ -1,18 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { fetchIngredientData } from '../utils/types'
+import { useRecoilValue } from 'recoil';
+import { ingredientData } from '../atom/food';
 
-export default function FoodIRDNT({data}:{data:fetchIngredientData[]}) {
+export default function FoodIRDNT({idx} :{idx: number}) {
   const [mainIRDNT, setMainIRDNT] = useState<Array<fetchIngredientData>>([]);
   const [subIRDNT, setSubIRDNT] = useState<Array<fetchIngredientData>>([]);
   const [spicyIRDNT, setSpicyIRDNT] = useState<Array<fetchIngredientData>>([]);
+  let tmpArrFir: any[] = [];
+  let tmpArrSec: any[] = [];
+  let tmpArrThir: any[] = [];
 
-  console.log(data);
+  const ingredientRowData = useRecoilValue(ingredientData);
+  const ingredient :fetchIngredientData[] = ingredientRowData.filter((el :fetchIngredientData) => el.RECIPE_ID === idx);
 
   useEffect(() => {
-    let tmpArrFir = [...mainIRDNT];
-    let tmpArrSec = [...subIRDNT];
-    let tmpArrThir = [...spicyIRDNT];
-    data.map((el) => {
+    ingredient.map((el :fetchIngredientData) => {
       switch(el.IRDNT_TY_NM) {
         case "주재료" : 
           tmpArrFir.push(el);
@@ -25,28 +28,27 @@ export default function FoodIRDNT({data}:{data:fetchIngredientData[]}) {
           break;
         default : break;
       }
-
     });
     setMainIRDNT(tmpArrFir);
     setSubIRDNT(tmpArrSec);
     setSpicyIRDNT(tmpArrThir);
-  }, []);
+  }, [idx]);
 
   return (
-    <div className='grid grid-cols-3 gap-14 lg:gap-20 mx-14 lg:mx-16
-      mb-10'>
+    <div className='grid grid-cols-3 gap-8 md:gap-12 lg:gap-20 mx-8 md:mx-12 lg:mx-16
+      '>
       <div className=''>
       <h5 className='px-3 py-1 bg-[#544D42] text-white
                 rounded-2xl mx-2 text-center'>주재료</h5>
         {mainIRDNT.map((el) => {
           return (
             <div>
-              <ul className='flex my-2 leading-8 text-center'>
+              <ul className='flex my-1 leading-8 text-center'>
                 <li className='m-1 flex-1 font-subMainSec
-                  text-xl leading-8'>
+                  text-md md:text-xl leading-8 text-[#323e44]'>
                     {el.IRDNT_NM}
                 </li>
-                <li className='m-1 text-md flex-1'>{el.IRDNT_CPCTY}</li>
+                <li className='m-1 text-sm lg:text-[1rem] leading-8 lg:leading-8 flex-1'>{el.IRDNT_CPCTY}</li>
               </ul>
             </div>
           )
@@ -59,12 +61,12 @@ export default function FoodIRDNT({data}:{data:fetchIngredientData[]}) {
           return (
             <div>
 
-              <ul className='flex my-2 leading-8 text-center'>
+              <ul className='flex my-1 leading-8 text-center'>
                 <li className='m-1 flex-1 font-subMainSec
-                  text-xl leading-8'>
+                  text-md md:text-xl leading-8 text-[#323e44]'>
                     {el.IRDNT_NM}
                 </li>
-                <li className='m-1 text-md flex-1'>{el.IRDNT_CPCTY}</li>
+                <li className='m-1 text-sm lg:text-[1rem] leading-8 lg:leading-8 flex-1'>{el.IRDNT_CPCTY}</li>
               </ul>
             </div>
           )
@@ -76,13 +78,12 @@ export default function FoodIRDNT({data}:{data:fetchIngredientData[]}) {
       {spicyIRDNT.map((el) => {
           return (
             <div>
- 
-              <ul className='flex my-2 leading-8 text-center'>
+              <ul className='flex my-1 leading-8 text-center'>
                 <li className='m-1 flex-1 font-subMainSec
-                  text-xl leading-8'>
+                  text-md md:text-xl leading-8 text-[#323e44]'>
                     {el.IRDNT_NM}
                 </li>
-                <li className='m-1 text-md flex-1'>{el.IRDNT_CPCTY}</li>
+                <li className='m-1 text-sm lg:text-[1rem] leading-8 lg:leading-8 flex-1'>{el.IRDNT_CPCTY}</li>
               </ul>
             </div>
           )

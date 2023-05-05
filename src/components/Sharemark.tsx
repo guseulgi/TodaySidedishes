@@ -2,8 +2,17 @@ import React from 'react'
 
 export default function Sharemark() {
   return (
-    <ul className='flex justify-center my-6'>
-      <li className='w-14 h-14 rounded-full bg-[#544D42] mr-7'>
+    <ul className='flex justify-center my-8 md:mt-8 md:mb-0'>
+      <li className='w-14 h-14 rounded-full bg-[#544D42] mr-7 text-center
+        leading-9 text-black-300 text-md
+        hover:scale-95 transition duration-150 hover:bg-[#3e3931]
+        before:bg-[#E8B465] before:w-20 before:h-9 before:block before:absolute
+        before:opacity-0 hover:before:opacity-100 before:bottom-[-2rem]
+        before:left-1/2 before:translate-x-[-50%] before:rounded-md
+        before:content-["URL_복사"] before:content-center
+        after:bg-[#E8B465] after:w-3 after:h-3 after:block after:bottom-[-0.2rem]
+        after:left-1/2 after:translate-x-[-50%] after:absolute after:opacity-0
+        hover:after:opacity-100 after:rotate-45'>
         <button>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             className="w-8 h-8 m-[12px] text-[#F5EFE6]">
@@ -11,7 +20,16 @@ export default function Sharemark() {
           </svg>
         </button>
       </li>
-      <li className='w-14 h-14 rounded-full bg-[#FFE660] mr-7'>
+      <li className='w-14 h-14 rounded-full bg-[#FFE660] mr-7
+        leading-9 text-white text-md text-center
+        hover:scale-95 transition duration-150 hover:bg-[#e5cf56]
+        before:bg-[#544D42] before:w-28 before:h-9 before:block before:absolute
+        before:opacity-0 hover:before:opacity-100 before:bottom-[-2rem]
+        before:left-1/2 before:translate-x-[-50%] before:rounded-md
+        before:content-["카카오톡_공유"]
+        after:bg-[#544D42] after:w-3 after:h-3 after:block after:bottom-[-0.2rem]
+        after:left-1/2 after:translate-x-[-50%] after:absolute after:opacity-0
+        hover:after:opacity-100 after:rotate-45'>
         <button>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
             className="w-8 h-8 m-[12px] text-[#544D42]">
@@ -19,7 +37,16 @@ export default function Sharemark() {
           </svg>
         </button>
       </li>
-      <li className='w-14 h-14 rounded-full bg-[#544D42]'>
+      <li className='w-14 h-14 rounded-full bg-[#544D42] mr-7 text-center
+        leading-9 text-black-300 text-md
+        hover:scale-95 transition duration-150 hover:bg-[#3e3931]
+        before:bg-[#E8B465] before:w-20 before:h-9 before:block before:absolute
+        before:opacity-0 hover:before:opacity-100 before:bottom-[-2rem]
+        before:left-1/2 before:translate-x-[-50%] before:rounded-md
+        before:content-["오류_신고"] before:content-center
+        after:bg-[#E8B465] after:w-3 after:h-3 after:block after:bottom-[-0.2rem]
+        after:left-1/2 after:translate-x-[-50%] after:absolute after:opacity-0
+        hover:after:opacity-100 after:rotate-45'>
         <button>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
             className="w-8 h-8 m-[12px] text-[#F5EFE6]">

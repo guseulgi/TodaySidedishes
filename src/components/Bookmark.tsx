@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-export default function Bookmark() {
-  const [isClicked, setIsClicked] = useState<boolean>(false);
+export default function Bookmark({clicked} :{clicked: boolean}) {
+  const [isClicked, setIsClicked] = useState<boolean>(clicked);
 
   const clickBookmark = () => {
     setIsClicked((cur) => !cur)

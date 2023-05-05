@@ -47,3 +47,16 @@ export interface fetchIngredientData {
   IRDNT_TY_CODE? : string,
   IRDNT_TY_NM : string,
 }
+
+/*
+RECIPE_ID	레시피 코드
+COOKING_NO	요리설명순서
+COOKING_DC	요리설명
+STEP_TIP	과정팁
+*/
+export interface fetchRecipeData {
+  RECIPE_ID: number,
+  COOKING_NO: number,
+  COOKING_DC: string,
+  STEP_TIP?: string,
+}
