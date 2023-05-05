@@ -1,57 +1,63 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useRecoilState } from 'recoil';
+import { isMMenu } from '../atom/booleans';
 
 export default function Header() {
-  const [inputs, setInputs] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
-  const mMenuRef = useRef<HTMLDivElement>(null);
+
+  const [isMMenuRow, setIsMMenuRow] = useRecoilState(isMMenu);
 
   const clickHamburger = () => {
-    if(mMenuRef.current === null) return;
-
-    // if(mMenuRef.current.classList.contains('opacity-0')){
-    //   mMenuRef.current.classList.remove('opacity-0');
-    //   mMenuRef.current.classList.add('translate-x-0');
-    // }
-    // else {
-    // mMenuRef.current.classList.add('opacity-0');
-    // mMenuRef.current.classList.remove('translate-x-0');
-    // }
-
-    if(mMenuRef.current.classList.contains('invisible')){
-      mMenuRef.current.classList.remove('invisible');
-      // mMenuRef.current.classList.add('translate-x-0');
-    }
-    else {
-    mMenuRef.current.classList.add('invisible');
-    // mMenuRef.current.classList.remove('translate-x-0');
-    }
+    setIsMMenuRow(!isMMenuRow);
   }
 
   return (
-    <div className='bg-white drop-shadow-sm'>
-      <div className='flex justify-between relative ml-6 mr-6 mt-2 pb-2'>
-        <div className='flex'>
+    <div className='bg-white drop-shadow-sm h-[96px] box-border'>
+      <div className='flex justify-between relative ml-6 mr-6
+      h-full'>
+        <div className='flex mt-2'>
           <Link to='/' className='w-24 cursor-pointer'>
             <img src='./Logo2.png' className='select-none'/>
           </Link>
         </div>
-        <div className='hidden md:block flex-1 flex-shrink-0 ml-5 my-auto'>
-          <ul className='flex text-center'>
+        <div className='hidden md:block flex-1 flex-shrink-0 ml-5 h-full'>
+          <ul className='flex text-center h-full'>
             <li className='text-[#544D42] text-[1.4rem] font-subMain
-              w-8/12 h-full cursor-pointer hover:scale-110 transition
-              duration-200'>
-              <Link to='/info'>Kitchen's?</Link>
+              w-8/12 h-full cursor-pointer relative
+              leading-[6rem] group'>
+              <Link to='/info' className='block group-hover:scale-110
+                transition duration-200 h-full'>Kitchen's?</Link>
+              <div className='absolute left-1/2 translate-x-[-50%] 
+              group-hover:w-2/5 group-hover:translate-x-0 h-[3px] bottom-0
+              bg-[#544D42] transition duration-500'></div>
+              <div className='absolute left-1/2 translate-x-[-50%] 
+              group-hover:w-2/5 group-hover:translate-x-[-100%] h-[3px] bottom-0
+              bg-[#544D42] transition duration-500'></div>
             </li>
             <li className='text-[#544D42] text-[1.4rem] font-subMain
-              w-8/12 h-full cursor-pointer hover:scale-110 transition
-              duration-200'>
-              <Link to='/recomand'>오늘의 추천</Link>
+              w-8/12 h-full cursor-pointer relative
+              leading-[6rem] group'>
+              <Link to='/recomand' className='block group-hover:scale-110
+                transition duration-200 h-full'>오늘의 추천</Link>
+              <div className='absolute left-1/2 translate-x-[-50%] 
+              group-hover:w-2/5 group-hover:translate-x-0 h-[3px] bottom-0
+              bg-[#544D42] transition duration-500'></div>
+              <div className='absolute left-1/2 translate-x-[-50%] 
+              group-hover:w-2/5 group-hover:translate-x-[-100%] h-[3px] bottom-0
+              bg-[#544D42] transition duration-500'></div>
             </li>
             <li className='text-[#544D42] text-[1.4rem] font-subMain
-              w-8/12 h-full cursor-pointer hover:scale-110 transition
-              duration-200'>
-              <Link to='/contact'>Contact</Link>
+              w-8/12 h-full cursor-pointer relative
+              leading-[6rem] group'>
+              <Link to='/contact' className='block group-hover:scale-110
+                transition duration-200 h-full'>Contact</Link>
+              <div className='absolute left-1/2 translate-x-[-50%] 
+              group-hover:w-2/5 group-hover:translate-x-0 h-[3px] bottom-0
+              bg-[#544D42] transition duration-500'></div>
+              <div className='absolute left-1/2 translate-x-[-50%] 
+              group-hover:w-2/5 group-hover:translate-x-[-100%] h-[3px] bottom-0
+              bg-[#544D42] transition duration-500'></div>
             </li>
           </ul>
         </div>
@@ -84,41 +90,6 @@ export default function Header() {
               onClick={clickHamburger}>
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-          {/* 모바일 메뉴 */}
-          <div className='invisible absolute right-0 top-16 bg-[#F2EFE7] w-1/4
-            before:absolute before:right-2 before:top-[-6px] before:w-4 before:h-4
-            before:bg-[#F2EFE7] before:z-[-1] before:rotate-45
-            transition duration-300 border border-[#e7e2d3]
-            z-10'
-            ref={mMenuRef}>
-            <ul className='text-center cursor-pointer select-none'>
-              <li className='py-4 hover:bg-[#e7e2d3] hover:underline
-                hover:font-bold transition duration-100 font-subMain text-[1.2rem]
-                text-[#544D42]'>
-                <Link to='/login'>로그인</Link>
-              </li>
-              <li className='py-4 hover:bg-[#e7e2d3] hover:underline
-                hover:font-bold transition duration-100 font-subMain text-[1.2rem]
-                text-[#544D42]'>
-                <Link to='/login/signup'>회원가입</Link>
-              </li>
-              <li className='py-4 hover:bg-[#e7e2d3] hover:underline
-                hover:font-bold transition duration-100 font-subMain text-[1.2rem]
-                text-[#544D42]'>
-                <Link to='/info'>Kitchen's?</Link>
-              </li>
-              <li className='py-4 hover:bg-[#e7e2d3] hover:underline
-                hover:font-bold transition duration-100 font-subMain text-[1.2rem]
-                text-[#544D42]'>
-                <Link to='/recomand'>오늘의 추천</Link>
-              </li>
-              <li className='py-4 hover:bg-[#e7e2d3] hover:underline
-                hover:font-bold transition duration-100 font-subMain text-[1.2rem]
-                text-[#544D42]'>
-                <Link to='/contact'>Contact</Link>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>

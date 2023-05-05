@@ -12,7 +12,7 @@ export default function FoodItem({idx} :{idx:number}) {
 
     return (
     <article className='h-full md:flex justify-between w-[85vw] mx-auto
-    border-b-2 mb-7'>
+      border-b-2 mb-7 z-[2]'>
       <div className='select-none mt-12 md:flex-1 md:mr-5'>
         <div className='flex ml-4'>
           <Bookmark clicked={false} />
