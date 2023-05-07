@@ -3,11 +3,11 @@ import React from 'react'
 export default function Info() {
   return (
     <div className='w-4/6 mx-auto h-[75vh]'>
-      <h2 className='text-[2.5rem] font-main text-[#323e44]
+      <h2 className='text-[2.5rem] font-main
          text-center mt-12'>
         Kitchen's 는  
       </h2>
-      <h2 className='text-[2.5rem] font-main text-[#323e44]
+      <h2 className='text-[2.5rem] font-main
        text-center mb-6'>
         무얼 하는 사이트인가요?   
       </h2>
