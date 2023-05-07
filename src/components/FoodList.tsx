@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import FoodItem from './FoodItem'
 import axios from 'axios';
 import Loading from '../pages/Loading';
-import Sharemark from './Sharemark';
 import NotData from '../pages/NotData';
 import FoodIRDNT from './FoodIRDNT';
 import FoodRecipe from './FoodRecipe';

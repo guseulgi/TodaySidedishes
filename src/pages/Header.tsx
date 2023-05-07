@@ -38,8 +38,8 @@ export default function Header() {
             <li className='text-[#544D42] text-[1.4rem] font-subMain
               w-8/12 h-full cursor-pointer relative
               leading-[6rem] group'>
-              <Link to='/recomand' className='block group-hover:scale-110
-                transition duration-200 h-full'>오늘의 추천</Link>
+              <Link to='/list' className='block group-hover:scale-110
+                transition duration-200 h-full'>레시피 목록</Link>
               <div className='absolute left-1/2 translate-x-[-50%] 
               group-hover:w-2/5 group-hover:translate-x-0 h-[3px] bottom-0
               bg-[#544D42] transition duration-500'></div>

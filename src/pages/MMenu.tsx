@@ -28,7 +28,7 @@ export default function MMenu() {
           <li className='py-4 hover:bg-[#e7e2d3] hover:underline
             hover:font-bold transition duration-100 font-subMain text-[1.2rem]
             text-[#544D42]'>
-            <Link to='/recomand'>오늘의 추천</Link>
+            <Link to='/list'>레시피 목록</Link>
           </li>
           <li className='py-4 hover:bg-[#e7e2d3] hover:underline
             hover:font-bold transition duration-100 font-subMain text-[1.2rem]
