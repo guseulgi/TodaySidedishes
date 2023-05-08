@@ -2,9 +2,11 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { basicData } from '../atom/food';
 import {fetchBasicData} from '../utils/types';
+import { useNavigate } from 'react-router-dom';
 
 export default function AllList() {
   const basicDataRow = useRecoilValue(basicData);
+  const navigation = useNavigate();
 
   return (
     <div>
@@ -31,13 +33,18 @@ export default function AllList() {
 
           return (
             <li className='flex my-8 hover:scale-105
-              transition duration-200'>
+              transition duration-200 cursor-pointer py-3 px-5
+              hover:bg-[#F5EFE6] group rounded-sm
+              ' onClick={() => navigation(`/${idx + 1}`)}>
               <p className='bg-[#F5EFE6] rounded-full w-7 h-7
                 text-[#544D42] font-bold font-subMainSec text-xl
-                my-auto text-center pb-2 drop-shadow-sm'>{idx + 1} </p>
+                my-auto text-center pb-2 drop-shadow-sm
+                group-hover:text-white group-hover:bg-[#544D42]'>{idx + 1} </p>
               <p className='pl-3 font-subMain w-1/5 lg:w-1/4
-                text-2xl text-[#544D42] my-auto'>{el.RECIPE_NM_KO}</p>
-              <p className='h-full my-auto flex-1'>{el.SUMRY}</p>
+                text-2xl text-[#544D42] my-auto
+                '>{el.RECIPE_NM_KO}</p>
+              <p className='h-full my-auto flex-1
+                '>{el.SUMRY}</p>
               <p className='text-sm flex my-auto text-white font-bold
                 py-1 px-2 ml-2 rounded-lg' style={{
                   backgroundColor : colorLV,

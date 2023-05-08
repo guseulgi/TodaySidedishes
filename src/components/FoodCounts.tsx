@@ -10,7 +10,7 @@ export default function FoodCounts({idx} :{idx: number}) {
   const navigate = useNavigate();
 
   return (
-    <div className='w-full absolute top-40'>
+    <div className='w-full absolute top-60'>
         <ul className='flex justify-between'>
           <li>
           <button onClick={
