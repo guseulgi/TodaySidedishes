@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {SiDevrant} from 'react-icons/si';
 
 export default function NotFound() {
   return (
     <div className='relative'>
       <h3 className='font-main text-4xl absolute
         left-1/2 translate-x-[-50%] top-14'>
-        페이지를 찾을 수 없습니다.
+        <SiDevrant className='w-9 h-9' /> 페이지를 찾을 수 없습니다.
       </h3>
       <img src="/images/source/notfound.jpg" alt="" 
         className='w-full'/>

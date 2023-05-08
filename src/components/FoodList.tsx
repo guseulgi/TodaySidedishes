@@ -13,9 +13,10 @@ import FoodReview from './FoodReview';
 export default function FoodList() {
   const { foodId } = useParams();
 
-  let idx: number = Math.floor(Math.random() * 85);
-  if(foodId !== undefined)
+  let idx: number = 1;
+  if(foodId !== undefined) { 
     idx = parseInt(foodId, 10);
+  }
 
   const basic = useRecoilValue(basicData);
   const ingredient = useRecoilValue(ingredientData);

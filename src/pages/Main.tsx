@@ -4,8 +4,16 @@ import {  useSetRecoilState } from 'recoil';
 import { basicData, ingredientData, recipeData } from '../atom/food';
 import axios from 'axios';
 import Loading from './Loading';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function Main() {
+  const { foodId } = useParams();
+  const navigation = useNavigate();
+
+  let idx: number = Math.floor(Math.random() * 85);
+  if(foodId === undefined) { 
+    navigation(`/${idx}`);
+  }
 
   const [loading, setLoading] = useState<boolean>(false);
 
