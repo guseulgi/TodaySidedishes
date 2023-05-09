@@ -1,6 +1,8 @@
 import React from 'react'
 
 export default function Sharemark() {
+  console.log(window.location);
+
   return (
     <ul className='flex justify-center my-8 md:mt-8 md:mb-0'>
       <li className='w-14 h-14 rounded-full bg-[#544D42] mr-7 text-center
@@ -13,7 +15,12 @@ export default function Sharemark() {
         after:bg-[#E8B465] after:w-3 after:h-3 after:block after:bottom-[-0.2rem]
         after:left-1/2 after:translate-x-[-50%] after:absolute after:opacity-0
         hover:after:opacity-100 after:rotate-45'>
-        <button>
+        <button onClick={() => {
+          navigator.clipboard.writeText(`${window.location.origin}`+`${window.location.pathname}`)
+          .then(() => {
+            alert('레시피 주소가 복사되었습니다.');
+          })
+        }}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             className="w-8 h-8 m-[12px] text-[#F5EFE6]">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
@@ -47,7 +54,9 @@ export default function Sharemark() {
         after:bg-[#E8B465] after:w-3 after:h-3 after:block after:bottom-[-0.2rem]
         after:left-1/2 after:translate-x-[-50%] after:absolute after:opacity-0
         hover:after:opacity-100 after:rotate-45'>
-        <button>
+        <button onClick={() => {
+          alert('준비 중입니다.');
+        }}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
             className="w-8 h-8 m-[12px] text-[#F5EFE6]">
             <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
