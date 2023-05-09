@@ -10,8 +10,8 @@ export default function Login() {
       lg:block bg-fixed bg-repeat'/>
       <div className='flex flex-col align-middle w-8/12 md:w-5/12 h-4/6 my-20 mx-auto
         lg:rounded-full bg-white drop-shadow-lg'>
-        <h5 className='text-center mt-10 lg:mt-20 text-2xl
-          text-[#536F7D]'>오늘도 신나게 쿠킹! 🍾</h5>
+        <h5 className='text-center mt-10 lg:mt-20 text-3xl
+          text-[#536F7D] font-subMainSec'>오늘도 신나게 쿠킹! 🍾</h5>
         <input type='text' placeholder='이메일 입력' 
           className='block w-3/4 lg:w-3/5 h-8 mx-auto mt-12 py-5 px-2
           rounded-md border-b-2 border-[#544D42] outline-none
