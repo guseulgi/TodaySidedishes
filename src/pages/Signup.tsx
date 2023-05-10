@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import {SiFirebase} from 'react-icons/si';
 import {RiLockPasswordFill} from 'react-icons/ri';
 import {MdEmail} from 'react-icons/md';
@@ -6,9 +6,14 @@ import {CgUserlane} from 'react-icons/cg';
 import { firestore } from '../firebase';
 
 export default function Signup() {
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const emailAtInputRef = useRef<HTMLSelectElement>(null);
+
+  const [isDuplicate, setIsDuplicate] = useState<boolean>(false);
   const [isCertify, setIsCertify] = useState<boolean>(false);
-  const [isCertifyConfirm, setIsCertifyConfirm] = useState<boolean>(false);
   
+  const [isNicknameCertify, setIsNicknameCertify] = useState<boolean>(false);
+
   const [isPasswordCertify, setIsPasswordCertify] = useState<boolean>(false);
 
   const [passwordInput, setPasswordInput] = useState<string>('');
@@ -23,6 +28,40 @@ export default function Signup() {
       setIsPasswordCertify(false);
     }
   }, [passwordInput, passwordConfirmInput]);
+
+  const isEmailCheck = useCallback(() => {
+    if(emailInputRef.current?.value === '') return;
+
+    const tmpEmail = emailInputRef.current?.value+'@'+emailAtInputRef.current?.value;
+
+    firestore.collection('users').get()
+      .then((result) => result.forEach((doc) => {
+        if(doc.data().email === tmpEmail) {
+          // 이메일이 존재하면 -> 동일한 이메일이 존재한다고 안내메세지
+          setIsCertify(false);
+          setIsDuplicate(true);
+          return;
+        }
+      }));
+
+      setIsCertify(true);
+      setIsDuplicate(false);
+    // 전송 버튼 확인 해주기
+  }, []);
+
+  const nicknameCheck = useCallback((e :React.ChangeEvent<HTMLInputElement>) => {
+    setIsNicknameCertify(false);
+
+    if(e.target.value.length < 2 || e.target.value.length > 8) return;
+
+    if( e.target.value !== '' )
+      setIsNicknameCertify(true);
+  }, []);
+
+  const registerUser = useCallback((e :React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+  }, []);
   
   return (
     <form className='my-16 w-[93vw] sm:w-[75vw] lg:w-[45vw] mx-auto relative'>
@@ -48,48 +87,53 @@ export default function Signup() {
           <span>이메일</span>
         </li>
         <li className='my-2'>
-          <input type="text" name="email" required placeholder='이메일 입력'
+          <input type="text" name="email" required ref={emailInputRef}
+            placeholder='이메일 입력'
             className='outline-none border-[1px] rounded-md py-1 px-3
             w-52 mr-2'/>
           <span>@</span>
-          <select name="at" className='appearance-none border-[1px]
+          <select name="at" ref={emailAtInputRef}
+            className='appearance-none border-[1px]
             py-1 px-3 mx-2 rounded-md'>
-            <option value="naver">naver.com</option>
-            <option value="gmail" >gmail.com</option>
-            <option value="hanmail" >hanmail.net</option>
+            <option value="naver.com" >naver.com</option>
+            <option value="gmail.com" >gmail.com</option>
+            <option value="hanmail.net" >hanmail.net</option>
           </select>
           <button className='py-2 px-3 rounded-md bg-[#544D42]
             text-white text-sm hover:bg-[#716758] hover:scale-95 transition
             duration-200'
-            onClick={() => {
-              setIsCertify(true);
-            }}>인증하기</button>
+            onClick={isEmailCheck}>중복확인</button>
         </li>
         <>
-          {isCertify ? (<li className='mb-5 mx-1'>
-            {isCertifyConfirm ? <span className='text-green-600'>성공적으로 인증되었습니다.</span> 
-            : <span className='text-red-600'>인증 메일이 발송되었습니다.</span>}
-            <input type="text" name='emailconfirm' required placeholder='인증번호 입력' 
-              className='outline-none border-[1px] rounded-md py-1 px-3
-              mx-2 w-32'/>
-            <button className='py-2 px-3 rounded-md bg-[#544D42]
-              text-white text-sm hover:bg-[#716758] hover:scale-95 transition
-              duration-200'
-              onClick={() => {
-                setIsCertifyConfirm(true);
-              }}>확인</button>
-          </li>) 
-          : null}
+          { isDuplicate ? <li className='mb-5 mx-1'>
+            <span className='text-red-600'>동일한 이메일이 존재합니다.</span>
+          </li>
+          : <>
+            {isCertify ? (<li className='mb-5 mx-1'>
+              <span className='text-green-600'>사용가능한 이메일입니다.</span> 
+            </li>) 
+              : null}
+            </>}
         </>
+
         <li className='flex my-2'>
           <CgUserlane className='w-6 h-6 mx-2'/>
           <span>닉네임</span>
         </li>
-        <li className='mb-6'>
+        <li className='mb-2'>
           <input type="text" name="nickname" required placeholder='닉네임 입력'
+            onChange={nicknameCheck}
             className='outline-none border-[1px] rounded-md py-1 px-3
             w-52 mr-2' />
         </li>
+        <>
+          {isNicknameCertify ? <li className='mb-6 mx-1'>
+            <span className='text-green-600'>사용가능한 닉네임입니다.</span>
+          </li> : <li className='mb-6 mx-1'>
+            <span className='text-red-600'>닉네임을 최소 2글자에서 8글자 이내로 입력해주세요.</span>
+          </li>}
+        </>
+
         <li className='mb-2 flex my-auto'>
           <RiLockPasswordFill className='w-6 h-6 mx-2'/>
           <span>비밀번호</span>
@@ -118,9 +162,7 @@ export default function Signup() {
         bg-[#544D42] ml-6 w-52 mr-2 text-white
         hover:bg-[#716758] hover:scale-95 transition
         duration-200'
-        onClick={(e) => {
-          e.preventDefault();
-        }}>회원가입 하기</button>
+        onClick={registerUser}>회원가입 하기</button>
     </form>
   )
 }
