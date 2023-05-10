@@ -18,7 +18,7 @@ import FoodList from './components/FoodList';
 function App() {
   const [isMMenuRow, setIsMMenuRow] = useRecoilState(isMMenu);
   const basicRowData = useRecoilValue(basicData);
-  // const index = useRecoilValue(curIndex);
+
   return (
     <>
       <Header />

@@ -3,7 +3,7 @@ import {SiFirebase} from 'react-icons/si';
 import {RiLockPasswordFill} from 'react-icons/ri';
 import {MdEmail} from 'react-icons/md';
 import {CgUserlane} from 'react-icons/cg';
-
+import { firestore } from '../firebase';
 
 export default function Signup() {
   const [isCertify, setIsCertify] = useState<boolean>(false);
@@ -38,7 +38,7 @@ export default function Signup() {
       <img src='/images/source/cooking2.png' 
         className='absolute top-10 left-[-280px]
         hidden lg:block opacity-80'/>
-        <img src='/images/source/cooking3.png' 
+      <img src='/images/source/cooking3.png' 
         className='absolute top-[-43px] right-[-200px]
         hidden lg:block opacity-80'/>
 
