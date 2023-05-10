@@ -13,6 +13,7 @@ export default function Signup() {
   const [isCertify, setIsCertify] = useState<boolean>(false);
   
   const [isNicknameCertify, setIsNicknameCertify] = useState<boolean>(false);
+  const nicknameRef = useRef<HTMLInputElement>(null);
 
   const [isPasswordCertify, setIsPasswordCertify] = useState<boolean>(false);
 
@@ -46,7 +47,6 @@ export default function Signup() {
 
       setIsCertify(true);
       setIsDuplicate(false);
-    // 전송 버튼 확인 해주기
   }, []);
 
   const nicknameCheck = useCallback((e :React.ChangeEvent<HTMLInputElement>) => {
@@ -58,10 +58,37 @@ export default function Signup() {
       setIsNicknameCertify(true);
   }, []);
 
+  const passwordCheck = useCallback((e :React.ChangeEvent<HTMLInputElement>) => { 
+    if(e.target.value.length < 4 || e.target.value.length > 12) return;
+
+    setPasswordInput(e.target.value);
+  }, []);
+
+  const passwordConfirmCheck = useCallback((e :React.ChangeEvent<HTMLInputElement>) => { 
+    if(e.target.value.length < 4 || e.target.value.length > 12) return;
+
+    setPasswordConfirmInput(e.target.value);
+  }, []);
+
   const registerUser = useCallback((e :React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-  }, []);
+    // 회원 가입 처리
+    if (isCertify && isNicknameCertify && isPasswordCertify) {
+      const newUser = {
+        email : emailInputRef.current?.value+'@'+emailAtInputRef.current?.value,
+        nickname : nicknameRef.current?.value,
+        password : passwordInputRef.current?.value,
+      }
+
+      console.log(newUser);
+
+      firestore.collection("users").add(newUser)
+        .then((doc) => {
+          console.log(doc.id, doc);
+        })
+    }
+  }, [isCertify, isNicknameCertify, isPasswordCertify]);
   
   return (
     <form className='my-16 w-[93vw] sm:w-[75vw] lg:w-[45vw] mx-auto relative'>
@@ -122,7 +149,7 @@ export default function Signup() {
         </li>
         <li className='mb-2'>
           <input type="text" name="nickname" required placeholder='닉네임 입력'
-            onChange={nicknameCheck}
+            onChange={nicknameCheck} ref={nicknameRef}
             className='outline-none border-[1px] rounded-md py-1 px-3
             w-52 mr-2' />
         </li>
@@ -130,7 +157,7 @@ export default function Signup() {
           {isNicknameCertify ? <li className='mb-6 mx-1'>
             <span className='text-green-600'>사용가능한 닉네임입니다.</span>
           </li> : <li className='mb-6 mx-1'>
-            <span className='text-red-600'>닉네임을 최소 2글자에서 8글자 이내로 입력해주세요.</span>
+            <span className='text-red-600'>2글자에서 8글자 이내로 입력해주세요.</span>
           </li>}
         </>
 
@@ -140,25 +167,25 @@ export default function Signup() {
         </li>
         <li className='mb-2'>
           <input type="password" name="password" ref={passwordInputRef}
-            required placeholder='비밀번호 입력' autoComplete='on'
+            required placeholder='비밀번호는 4자에서 12자 이내' autoComplete='on'
             className='outline-none border-[1px] rounded-md py-1 px-3
-            w-52 mr-2' onChange={(e) => setPasswordInput(e.target.value)}/>
+            w-52 mr-2' onChange={passwordCheck}/>
         </li>
         <li className='mb-2'>
           <input type="password" name="passwordconfirm" ref={passwordConfirmInputRef}
             required placeholder='비밀번호 확인' autoComplete='on'
             className='outline-none border-[1px] rounded-md py-1 px-3
-            w-52 mr-2' onChange={(e) => setPasswordConfirmInput(e.target.value)}/>
+            w-52 mr-2' onChange={passwordConfirmCheck}/>
         </li>
         { isPasswordCertify ? 
-        <li className='mb-6 mx-1'>
-          <span className='text-green-600'>비밀번호가 일치합니다.</span>
-        </li> : 
-        <li className='mb-6 mx-1'>
-          <span className='text-red-600'>비밀번호가 일치하지 않습니다.</span>
-        </li>}
+          <li className='mb-6 mx-1'>
+            <span className='text-green-600'>비밀번호가 일치합니다.</span>
+          </li> : 
+          <li className='mb-6 mx-1'>
+            <span className='text-red-600'>비밀번호가 일치하지 않습니다.</span>
+          </li> }
       </ul>
-      <button type='submit' className='rounded-md py-1 px-3 
+      <button className='rounded-md py-1 px-3 
         bg-[#544D42] ml-6 w-52 mr-2 text-white
         hover:bg-[#716758] hover:scale-95 transition
         duration-200'
