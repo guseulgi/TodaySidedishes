@@ -14,10 +14,10 @@ import MMenu from './pages/MMenu';
 import AllList from './pages/AllList';
 import { basicData } from './atom/food';
 import FoodList from './components/FoodList';
+import MyPage from './pages/MyPage';
 
 function App() {
   const [isMMenuRow, setIsMMenuRow] = useRecoilState(isMMenu);
-  const basicRowData = useRecoilValue(basicData);
 
   return (
     <>
@@ -30,6 +30,7 @@ function App() {
         <Route path='/info' element={<Info />} />
         <Route path='/list' element={<AllList />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='/mypage' element={<MyPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/login/signup' element={<Signup />} />
         <Route path='*' element={<NotFound />} />

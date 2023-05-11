@@ -7,7 +7,7 @@ import { allUsers } from '../atom/user';
 
 export default function Login() {
   const navigator = useNavigate();
-  
+
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwrodInputRef = useRef<HTMLInputElement>(null);
 
@@ -33,10 +33,10 @@ export default function Login() {
     if(emailInputRef.current === null && passwrodInputRef.current === null)
       return;
     
-    const user = users.find((el :User) => emailInputRef.current?.value === el.email && passwrodInputRef.current?.value === el.password);
-    if(user === null) return;
+    const user :any = users.find((el :User) => emailInputRef.current?.value === el.email && passwrodInputRef.current?.value === el.password);
+    if(user === null || user === undefined) return;
 
-    window.localStorage.setItem("USER", "로그인 됨");
+    window.localStorage.setItem("USER", `${user?.nickname}`);
     navigator('/');
   }
 
@@ -54,7 +54,7 @@ export default function Login() {
           className='block w-3/4 lg:w-3/5 h-8 mx-auto mt-12 py-5 px-2
           rounded-md border-b-2 border-[#544D42] outline-none
           focus:bg-[#FFF7F2]' />
-        <input type='text' placeholder='비밀번호 입력' ref={passwrodInputRef}
+        <input type='password' placeholder='비밀번호 입력' ref={passwrodInputRef}
           className='block w-3/4 lg:w-3/5 h-8 mx-auto mt-6 py-5 px-2
           rounded-md border-b-2 border-[#544D42] outline-none
           focus:bg-[#FFF7F2]' />

@@ -1,9 +1,10 @@
 import React, { useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil';
 import { isMMenu } from '../atom/booleans';
 
 export default function Header() {
+  const navigator = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isMMenuRow, setIsMMenuRow] = useRecoilState(isMMenu);
@@ -11,6 +12,9 @@ export default function Header() {
   const clickHamburger = () => {
     setIsMMenuRow(!isMMenuRow);
   }
+
+  const iconStyle = 'identicon';
+  const iconSource = `https://api.dicebear.com/6.x/${iconStyle}/svg?seed=${window.localStorage.getItem("USER")}`;
 
   return (
     <div className='bg-white drop-shadow-sm h-[96px] box-border'>
@@ -78,12 +82,35 @@ export default function Header() {
             </svg>
           </div>
           <div className='my-auto flex'>
-            <Link to='/login' className='hidden md:block p-2 px-5 
-              text-white bg-[#7B8F9E] rounded-lg font-bold drop-shadow-sm
-              hover:scale-95 hover:bg-[#536F7D] transition duration-200'>로그인</Link>  
-            <Link to='/login/signup' className='hidden md:block p-2 px-5 ml-3 
-              text-white bg-[#7B8F9E] rounded-lg font-bold drop-shadow-sm
-              hover:scale-95 hover:bg-[#536F7D] transition duration-200'>회원가입</Link> 
+            {window.localStorage.getItem('USER') ? 
+              <>
+                <Link to='/mypage' className='m-auto mr-2 box-border
+                  w-9 h-9 rounded-sm drop-shadow-sm bg-white block
+                  border-[1px] hover:border-gray-300 border-gray-200
+                  hover:bg-gray-100 group '>                  
+                  <img src={iconSource} className='block w-6 h-6 m-[5px]
+                    group-hover:scale-90 transition duration-200' alt='프로필'/>
+                </Link>
+                <Link to='/' className='hidden md:block p-2 px-5 
+                  text-white bg-[#7B8F9E] rounded-lg font-bold drop-shadow-sm
+                  hover:scale-95 hover:bg-[#536F7D] transition duration-200'
+                  onClick={() => {
+                    window.localStorage.clear();
+                    navigator('/');
+                  }}>로그아웃</Link>
+              </>
+            : (
+              <>
+                <Link to='/login' className='hidden md:block p-2 px-5 
+                  text-white bg-[#7B8F9E] rounded-lg font-bold drop-shadow-sm
+                  hover:scale-95 hover:bg-[#536F7D] transition duration-200'>로그인</Link>  
+                <Link to='/login/signup' className='hidden md:block p-2 px-5 ml-3 
+                  text-white bg-[#7B8F9E] rounded-lg font-bold drop-shadow-sm
+                  hover:scale-95 hover:bg-[#536F7D] transition duration-200'>회원가입</Link>
+              </>
+            )
+            }
+            
           </div>
           {/* 모바일 햄버거 바 */}
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

@@ -1,8 +1,6 @@
 import React from 'react'
 
 export default function Sharemark() {
-  console.log(window.location);
-
   return (
     <ul className='flex justify-center my-8 md:mt-8 md:mb-0'>
       <li className='w-14 h-14 rounded-full bg-[#544D42] mr-7 text-center

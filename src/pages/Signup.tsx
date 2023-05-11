@@ -4,8 +4,11 @@ import {RiLockPasswordFill} from 'react-icons/ri';
 import {MdEmail} from 'react-icons/md';
 import {CgUserlane} from 'react-icons/cg';
 import { firestore } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
+  const navigator = useNavigate();
+  
   const emailInputRef = useRef<HTMLInputElement>(null);
   const emailAtInputRef = useRef<HTMLSelectElement>(null);
 
@@ -83,11 +86,13 @@ export default function Signup() {
 
       console.log(newUser);
 
-      firestore.collection("users").add(newUser)
+      firestore.collection("users").doc(`${emailInputRef.current?.value+'@'+emailAtInputRef.current?.value}`).set(newUser)
         .then((doc) => {
-          console.log(doc.id, doc);
+          console.log(doc);
         })
     }
+
+    navigator('/login');
   }, [isCertify, isNicknameCertify, isPasswordCertify]);
   
   return (
