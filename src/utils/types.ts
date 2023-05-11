@@ -60,3 +60,10 @@ export interface fetchRecipeData {
   COOKING_DC: string,
   STEP_TIP?: string,
 }
+
+/* 회원 스키마 */
+export interface User {
+  email: string,
+  password: string,
+  nickname: string,
+}

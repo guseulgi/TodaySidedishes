@@ -120,7 +120,7 @@ export default function Signup() {
             w-52 mr-2'/>
           <span>@</span>
           <select name="at" ref={emailAtInputRef}
-            className='appearance-none border-[1px]
+            className='border-[1px]
             py-1 px-3 mx-2 rounded-md'>
             <option value="naver.com" >naver.com</option>
             <option value="gmail.com" >gmail.com</option>
