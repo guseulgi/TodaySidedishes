@@ -2,10 +2,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { firestore } from '../firebase';
 import { User } from '../utils/types';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { allUsers } from '../atom/user';
+import { isMMenu } from '../atom/booleans';
 
 export default function Login() {
+  const [isMMenuRow, setIsMMenuRow] = useRecoilState(isMMenu);
+
+
+
   const navigator = useNavigate();
 
   const emailInputRef = useRef<HTMLInputElement>(null);

@@ -69,7 +69,7 @@ export default function Header() {
           <div className='ml-auto mr-5 my-auto relative'>
             <input type="text" className='p-1 pl-3
             border border-[#7B8F9E] outline-none rounded-sm 
-            transition duration-300 ease-in-out w-48 md:w-10 focus:w-48' 
+            transition duration-300 ease-in-out w-36 md:w-10 focus:w-36' 
             ref={inputRef} />
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
               className="w-6 h-6 text-[#544D42] absolute top-1 right-2 

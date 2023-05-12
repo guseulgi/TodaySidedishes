@@ -8,16 +8,15 @@ import Signup from './pages/Signup';
 import Info from './pages/Info';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { isMMenu } from './atom/booleans';
 import MMenu from './pages/MMenu';
 import AllList from './pages/AllList';
-import { basicData } from './atom/food';
 import FoodList from './components/FoodList';
 import MyPage from './pages/MyPage';
 
 function App() {
-  const [isMMenuRow, setIsMMenuRow] = useRecoilState(isMMenu);
+  const isMMenuRow = useRecoilValue(isMMenu);
 
   return (
     <>
