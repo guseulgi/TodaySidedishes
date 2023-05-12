@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
   const navigator = useNavigate();
-  
+
   const emailInputRef = useRef<HTMLInputElement>(null);
   const emailAtInputRef = useRef<HTMLSelectElement>(null);
 
@@ -76,6 +76,8 @@ export default function Signup() {
   const registerUser = useCallback((e :React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
+
+
     // 회원 가입 처리
     if (isCertify && isNicknameCertify && isPasswordCertify) {
       const newUser = {
@@ -84,12 +86,12 @@ export default function Signup() {
         password : passwordInputRef.current?.value,
       }
 
-      console.log(newUser);
-
-      firestore.collection("users").doc(`${emailInputRef.current?.value+'@'+emailAtInputRef.current?.value}`).set(newUser)
-        .then((doc) => {
-          console.log(doc);
-        })
+      firestore.collection("users")
+        .doc(`${emailInputRef.current?.value+'@'+emailAtInputRef.current?.value}`)
+        .set(newUser);
+    } else {
+      alert('정상적으로 회원가입이 되지 않았습니다. 🚫 입력 형식이 올바르지 않습니다.');
+      return;
     }
 
     navigator('/login');

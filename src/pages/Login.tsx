@@ -11,8 +11,6 @@ export default function Login() {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwrodInputRef = useRef<HTMLInputElement>(null);
 
-  const [emailInput, setEmailInput] = useState<string>('');
-
   const [users, setUsers] = useRecoilState(allUsers);
 
   const getUsers = async () => {
@@ -34,8 +32,17 @@ export default function Login() {
       return;
     
     const user :any = users.find((el :User) => emailInputRef.current?.value === el.email && passwrodInputRef.current?.value === el.password);
-    if(user === null || user === undefined) return;
+    if(user === null || user === undefined){
+      alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+      if(emailInputRef.current !== null && passwrodInputRef.current !== null) {
+        emailInputRef.current.value = '';
+        passwrodInputRef.current.value = '';
+      }
 
+      return;
+    }
+
+    window.localStorage.setItem("EMAIL", `${user?.email}`);
     window.localStorage.setItem("USER", `${user?.nickname}`);
     navigator('/');
   }
