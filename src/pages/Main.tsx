@@ -1,19 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import FoodList from '../components/FoodList';
-import {  useSetRecoilState } from 'recoil';
-import { basicData, ingredientData, recipeData } from '../atom/food';
+import {  useRecoilState, useSetRecoilState } from 'recoil';
+import { basicData, ingredientData, recipeData, reviewData } from '../atom/food';
 import axios from 'axios';
 import Loading from './Loading';
 import { useNavigate, useParams } from 'react-router-dom';
+import { firestore } from '../firebase';
 
 export default function Main() {
   const { foodId } = useParams();
   const navigation = useNavigate();
+  const [reviewDataRow ,setReviewDataRow] = useRecoilState(reviewData);
 
   let idx: number = Math.floor(Math.random() * 85);
   if(foodId === undefined) { 
     navigation(`/${idx}`);
   }
+
+  // useEffect(() => {
+  // // 댓글
+  //   const firestoreCommentData = async () => {
+  //     let tmpArr :any[] = [...reviewDataRow];
+  //     await firestore.collection('comment').doc(`${idx}`).get()
+  //     .then((result) => {
+  //       tmpArr[idx] = result.data();
+  //     });
+  //     setReviewDataRow(tmpArr);
+  //   }
+  //   firestoreCommentData();
+  // }, [idx]);
+
+
+
+
 
   const [loading, setLoading] = useState<boolean>(false);
 

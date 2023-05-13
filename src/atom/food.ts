@@ -23,3 +23,9 @@ export const recipeData = atom({
   key: 'recipe data',
   default: [],
 });
+
+// 인덱스에 따른 레시피 덧글 정보
+export const reviewData = atom({
+  key : 'review',
+  default: [] as any,
+})
