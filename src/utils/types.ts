@@ -67,3 +67,12 @@ export interface User {
   password: string,
   nickname: string,
 }
+
+// 덧글 스키마
+export interface Comment {
+  content :string,
+  goodCounts : number,
+  regdate : string,
+  reviewStars :number,
+  user : User,
+}
