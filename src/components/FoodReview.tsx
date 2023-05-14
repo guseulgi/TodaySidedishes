@@ -1,13 +1,45 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import FoodReviewInput from './FoodReviewInput'
 import {FaRegThumbsUp, FaThumbsUp} from 'react-icons/fa'
-import { useRecoilValue } from 'recoil'
-import { reviewData } from '../atom/food'
 import { Comment } from '../utils/types'
+import { useParams } from 'react-router-dom'
+import { firestore } from '../firebase'
 
-export default function FoodReview(idx : {idx:number}) {
-  const reviewDataRow = useRecoilValue(reviewData);
-  console.log(reviewDataRow);
+export default function FoodReview({idx}:{idx:number}) {
+  const {foodId} = useParams();
+  const [reRender, setReRender] = useState<boolean>(false);
+  const reviewDataRow = useRef<any>(null);
+
+  useEffect(() => {
+    setReRender(false);
+  }, [foodId]);
+
+  useEffect(() => {
+    reviewDataRow.current = null;
+    // 덧글
+    const firestoreCommentData = async () => {
+      await firestore.collection('comment').doc(foodId).get()
+      .then((result) => {
+        if(foodId !== undefined) {
+          reviewDataRow.current = result.data();
+          setReRender(true);
+        }
+      });
+    }
+    firestoreCommentData();
+  });
+
+  const deleteReview = async (index :number) => {
+    const isDelete = window.confirm('정말로 덧글을 삭제하시겠습니까?');
+    
+    if(isDelete) {
+      const originReviews = {
+        'coments' : reviewDataRow.current?.coments.filter((el :any, reviewIdx :any) => reviewIdx !== index)
+      };
+      await firestore.collection('comment').doc(`${foodId}`).set(originReviews);
+      setReRender((cur) => !cur);
+    }
+  }
 
   return (
     <div className='w-[85vw] mx-auto mt-16'>
@@ -21,51 +53,62 @@ export default function FoodReview(idx : {idx:number}) {
           한마디 
         </h2>
         <span className='text-xl italic my-auto ml-2 mt-3
-          text-amber-800'>{reviewDataRow.length}</span>
+          text-amber-800'>{reviewDataRow.current ? reviewDataRow.current.coments.length : '0'}</span>
       </div>
       <ul className='w-full my-2 '>
-        {/* 댓글 목록 */}
-        {reviewDataRow.map((el : Comment, index : any) => {
-          // 주어진 인덱스와 리뷰 인덱스가 같은 리뷰만 보이게 되어야 한다.
 
-          if(index === idx) {
-            let stars = '';
-            for(let i = 0; i < el.reviewStars; i++) {
-              stars += '⭐️';
-            };
+        {reviewDataRow.current && reviewDataRow.current.coments.map((el : Comment, index : any) => {
+          let stars = '';
+          for(let i = 0; i < el.reviewStars; i++) {
+            stars += '⭐️';
+          };
+          const iconStyle = 'identicon';
+          const iconSource = `https://api.dicebear.com/6.x/${iconStyle}/svg?seed=${el.user.nickname}`;        
 
-            return (
-              <li className='border-t-[1px] w-full flex my-3'>
-                <div className='w-14 h-14 bg-slate-400 mx-2 my-6
-                  rounded-full'></div>
-                <div className='flex-1 my-5'>
-                  <ul className='flex mb-1 justify-between'>
-                    <li className='flex'>
-                      <p className='text-[#544D42] font-bold text-lg
-                        ml-2 mr-3'>{el.user.nickname}</p>
-                      <p className='text-gray-400 text-sm my-auto'>{el.regdate}</p>
-                      <p className='my-auto text-sm mx-3'>{stars}</p>
-                    </li>
-                    <li className='flex mr-7 text-gray-400 my-auto
-                      text-sm'>
-                      <button >
-                        {true ? <FaRegThumbsUp className='hover:text-gray-500' /> 
-                        : <FaThumbsUp className='hover:text-blue-500' />}
-                      </button> 
-                      <span className='mx-2' >{el.goodCounts}</span>
-                      <p className='mx-2 text-xs text-gray-200 my-auto'> | </p>
-                      <button className='hover:text-gray-500'>신고</button>
-                    </li>
-                  </ul>
-                  <p className='w-5/6 mx-2
-                    '>{el.content}</p>
-                </div>
-              </li>
-            );
+          return (
+            <li key={index} className='border-t-[1px] w-full flex my-3'>
+              <div  className='w-14 h-14 mx-2 my-6 border-[1px]
+                drop-shadow-sm'>
+                <img src={iconSource} alt="프로필 이미지" 
+                  className='block w-9 h-9 my-[9px] mx-[9px]'/>
+              </div>
+              <div className='flex-1 my-5'>
+                <ul className='flex mb-1 justify-between'>
+                  <li className='flex'>
+                    <p className='text-[#544D42] font-bold text-lg
+                      ml-2 mr-3'>{el.user.nickname}</p>
+                    <p className='text-gray-400 text-sm my-auto'>{el.regdate}</p>
+                    <p className='my-auto text-sm mx-3'>{stars}</p>
+                  </li>
+                  <li className='flex mr-7 text-gray-400 my-auto
+                    text-sm'>
+                    <button >
+                      {el.user.nickname === window.localStorage.getItem('USER') ? null 
+                      : <FaThumbsUp className='hover:text-blue-500' />}
+                    </button> 
+                      {el.user.nickname === window.localStorage.getItem('USER') ? null 
+                        : <>
+                        <span className='ml-2' >{el.goodCounts}</span>
+                        <p className='mx-2 text-xs text-gray-200 my-auto'> | </p>
+                        <button className='hover:text-gray-500'>신고</button>
+                      </>}
+                    {el.user.nickname === window.localStorage.getItem('USER') ? 
+                        <button className='hover:text-gray-500'
+                        onClick={() => deleteReview(index)}>❌</button>
+                      : null
+                    }
+                  </li>
+                </ul>
+                <p className='w-5/6 mx-2
+                  '>{el.content}</p>
+              </div>
+            </li>
+          );
           }
-        })}
+        )}
       </ul>
-      <FoodReviewInput />
+      <FoodReviewInput idx={idx} reviewList={reviewDataRow.current}
+        setReRender={setReRender}/>
     </div>
   )
 }

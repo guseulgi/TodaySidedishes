@@ -11,29 +11,26 @@ export default function Main() {
   const { foodId } = useParams();
   const navigation = useNavigate();
   const [reviewDataRow ,setReviewDataRow] = useRecoilState(reviewData);
+  let tmpArr :any[] = [...reviewDataRow];
+  for(let i = 0; i < 87; i++) {
+    tmpArr.push(
+      {
+        content : '',
+        goodCounts : 0,
+        regdate : '',
+        reviewStars : 5,
+        user : {
+          nickname : 'undefined',
+          email : 'undefined',
+        },
+      }
+    );
+  }
 
   let idx: number = Math.floor(Math.random() * 85);
   if(foodId === undefined) { 
     navigation(`/${idx}`);
   }
-
-  // useEffect(() => {
-  // // 댓글
-  //   const firestoreCommentData = async () => {
-  //     let tmpArr :any[] = [...reviewDataRow];
-  //     await firestore.collection('comment').doc(`${idx}`).get()
-  //     .then((result) => {
-  //       tmpArr[idx] = result.data();
-  //     });
-  //     setReviewDataRow(tmpArr);
-  //   }
-  //   firestoreCommentData();
-  // }, [idx]);
-
-
-
-
-
   const [loading, setLoading] = useState<boolean>(false);
 
   const setBasic = useSetRecoilState(basicData);
@@ -80,6 +77,23 @@ export default function Main() {
     }
     fetchData();
   }, []);
+
+  // useEffect(() => {
+  //   // 덧글
+  //   const firestoreCommentData = async () => {
+  //     await firestore.collection('comment').doc(foodId).get()
+  //     .then((result) => {
+  //       if(foodId !== undefined) {
+  //         tmpArr[parseInt(foodId)] = result.data();
+  //       }
+  //     });
+  //     setReviewDataRow(tmpArr);
+
+  //     setLoading(false);
+  //   }
+  
+  //   firestoreCommentData();
+  // }, [foodId]);
 
   if(loading) return <Loading />;
 
