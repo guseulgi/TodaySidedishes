@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import FoodReviewInput from './FoodReviewInput'
-import {FaRegThumbsUp, FaThumbsUp} from 'react-icons/fa'
+import {FaThumbsUp} from 'react-icons/fa'
 import { Comment } from '../utils/types'
 import { useParams } from 'react-router-dom'
 import { firestore } from '../firebase'
@@ -41,8 +41,20 @@ export default function FoodReview({idx}:{idx:number}) {
     }
   }
 
+  const clickGoodBtn = async (index :number) => {
+    let findComment = reviewDataRow.current?.coments.find((el :any, reviewIdx :number) => reviewIdx === index);
+    findComment.goodCounts += 1;
+    reviewDataRow.current.coments[index] = findComment;
+
+    const changeReviews = {
+      'coments' : reviewDataRow.current.coments,
+    }
+    await firestore.collection('comment').doc(`${foodId}`).set(changeReviews);
+    setReRender((cur) => !cur);
+  }
+
   return (
-    <div className='w-[85vw] mx-auto mt-16'>
+    <div className='mx-auto mt-16 sm:w-[95vw] md:w-[85vw] xl:w-[70vw]'>
       <div className='flex'>
         <h2 className='font-main text-4xl 
         flex'>
@@ -52,7 +64,7 @@ export default function FoodReview({idx}:{idx:number}) {
           </svg>  
           한마디 
         </h2>
-        <span className='text-xl italic my-auto ml-2 mt-3
+        <span className='text-2xl my-auto ml-4
           text-amber-800'>{reviewDataRow.current ? reviewDataRow.current.coments.length : '0'}</span>
       </div>
       <ul className='w-full my-2 '>
@@ -84,13 +96,15 @@ export default function FoodReview({idx}:{idx:number}) {
                     text-sm'>
                     <button >
                       {el.user.nickname === window.localStorage.getItem('USER') ? null 
-                      : <FaThumbsUp className='hover:text-blue-500' />}
+                      : <FaThumbsUp className='hover:text-blue-500' 
+                          onClick={() => clickGoodBtn(index)}/>}
                     </button> 
                       {el.user.nickname === window.localStorage.getItem('USER') ? null 
-                        : <>
+                      : <>
                         <span className='ml-2' >{el.goodCounts}</span>
                         <p className='mx-2 text-xs text-gray-200 my-auto'> | </p>
-                        <button className='hover:text-gray-500'>신고</button>
+                        <button className='hover:text-gray-500'
+                          onClick={() => alert('준비 중입니다.')}>신고</button>
                       </>}
                     {el.user.nickname === window.localStorage.getItem('USER') ? 
                         <button className='hover:text-gray-500'

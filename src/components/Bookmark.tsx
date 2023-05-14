@@ -4,7 +4,8 @@ export default function Bookmark({clicked} :{clicked: boolean}) {
   const [isClicked, setIsClicked] = useState<boolean>(clicked);
 
   const clickBookmark = () => {
-    setIsClicked((cur) => !cur)
+    setIsClicked((cur) => !cur);
+    console.log('북마크');
   }
 
   return (

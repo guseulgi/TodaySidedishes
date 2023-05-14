@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {FaStar, FaRegStar} from 'react-icons/fa';
 import { firestore } from '../firebase';
 
@@ -12,6 +12,12 @@ export default function FoodReviewInput({idx, reviewList, setReRender}
     '별점을 등록해주세요!', '별로예요 😭', '그저그래요 🤨', '보통이에요 😀', '맛있어요 😋', '최고예요 😍'
   ]);
   const contentRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    setClickIdx(0);
+    if(contentRef.current !== null)
+      contentRef.current.value = '';
+  }, [idx]);
 
   useEffect(() => {
     let tmpArr = [false, false, false, false, false];
@@ -53,6 +59,7 @@ export default function FoodReviewInput({idx, reviewList, setReRender}
     if(contentRef.current !== null)
       contentRef.current.value = '';
     setReRender((cur :any) => !cur);
+    setClickIdx(0);
   }
 
   return (

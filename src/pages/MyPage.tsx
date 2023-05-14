@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react'
-import { firestore } from '../firebase';
 import { useRecoilState } from 'recoil';
 import { allUsers } from '../atom/user';
 import { User } from '../utils/types';
