@@ -4,7 +4,6 @@ import { curIndex } from '../atom/food';
 import { useNavigate } from 'react-router-dom';
 
 export default function FoodCounts({idx} :{idx: number}) {
-  const setIndex = useSetRecoilState(curIndex);
   const maxIndex = 85;
   const minIndex = 1;
   const navigate = useNavigate();

@@ -76,3 +76,7 @@ export interface Comment {
   reviewStars :number,
   user : User,
 }
+
+export interface Comments {
+  coments : Array<Comment>,
+}

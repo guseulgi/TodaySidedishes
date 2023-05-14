@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { Comments } from "../utils/types";
 
 // 음식 인덱스
 export const curIndex = atom({

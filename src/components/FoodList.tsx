@@ -49,7 +49,7 @@ export default function FoodList() {
       {ingredient && <FoodIRDNT idx={idx} />}
       {recipe && <FoodRecipe idx={idx} />}
 
-      <FoodReview idx={idx}/>
+      <FoodReview idx={idx} />
     </section>
   )
 }
