@@ -15,7 +15,7 @@ export default function FoodItem({idx} :{idx:number}) {
       border-b-2 mb-7 z-[2]'>
       <div className='select-none mt-12 md:flex-1 md:mr-5'>
         <div className='flex ml-4'>
-          <Bookmark clicked={false} />
+          <Bookmark idx={idx} />
           <h2 className='text-[3.2rem] font-bold font-main text-[#323e44]
             ml-3 w-5/6 border-b-4 border-[#536F7D]'>
               <span className='text-[2rem] italic

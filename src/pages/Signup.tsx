@@ -76,15 +76,18 @@ export default function Signup() {
   const registerUser = useCallback((e :React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
+    let tmpArr :Array<boolean> = [];
+    for(let i = 0; i < 87; i++) {
+      tmpArr[i] = false;
+    }
+
     // 회원 가입 처리
     if (isCertify && isNicknameCertify && isPasswordCertify) {
       const newUser = {
         email : emailInputRef.current?.value+'@'+emailAtInputRef.current?.value,
         nickname : nicknameRef.current?.value,
         password : passwordInputRef.current?.value,
-        bookmark : [
-          0,
-        ],
+        bookmark : tmpArr,
       }
 
       firestore.collection("users")

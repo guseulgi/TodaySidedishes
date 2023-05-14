@@ -66,6 +66,7 @@ export interface User {
   email: string,
   password: string,
   nickname: string,
+  bookmark: Array<boolean>,
 }
 
 // 덧글 스키마

@@ -1,13 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { firestore } from '../firebase';
 
-export default function Bookmark({clicked} :{clicked: boolean}) {
-  const [isClicked, setIsClicked] = useState<boolean>(clicked);
+export default function Bookmark({idx} :{idx: number}) {
+  const [isClicked, setIsClicked] = useState<boolean>(false);
+  const userRef = useRef<any>(null);
 
-  const clickBookmark = () => {
-    setIsClicked((cur) => !cur);
-    console.log('북마크');
+  useEffect(() => {
+    const userInfo = async () => {
+      await firestore.collection('users').doc(`${window.localStorage.getItem('EMAIL')}`).get()
+      .then((result) => {
+        console.log(result.data())
+        userRef.current = result.data();
+        setIsClicked(userRef.current.bookmark[idx]);
+      });
+    }
+    userInfo();
+  }, []);
+
+  useEffect(() => {
+    if(userRef.current !== null)
+      setIsClicked(userRef.current.bookmark[idx]);
+  }, [idx]);
+  
+  const clickBookmark = async () => {
+    if (userRef.current.bookmark[idx] === undefined) {
+      userRef.current.bookmark[idx] = false;
+    }
+
+    userRef.current.bookmark[idx] = !userRef.current.bookmark[idx];
+    setIsClicked(userRef.current.bookmark[idx]);
+    await firestore.collection('users').doc(`${window.localStorage.getItem('EMAIL')}`).set(userRef.current);
   }
-
+  
   return (
     <div onClick={clickBookmark}
       className='cursor-pointer inline-block my-auto'>
