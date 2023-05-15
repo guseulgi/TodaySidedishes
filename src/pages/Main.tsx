@@ -32,13 +32,14 @@ export default function Main() {
   }
   const [loading, setLoading] = useState<boolean>(false);
 
-  const setBasic = useSetRecoilState(basicData);
-  const setIngredient = useSetRecoilState(ingredientData);
-  const setRecipe = useSetRecoilState(recipeData);
+  const [basic, setBasic] = useRecoilState(basicData);
+  const [ingredient, setIngredient] = useRecoilState(ingredientData);
+  const [recipe, setRecipe] = useRecoilState(recipeData);
 
   useEffect(() => {
     setLoading(true);
-    const fetchData = async() => {
+
+    const fetchData = async () => {
       const basicGrid = process.env.REACT_APP_BASIC_GRID_NUM;
       const ingredientGrid = process.env.REACT_APP_INGREDIENT_GRID_NUM;
       const recipeGrid = process.env.REACT_APP_RECEIPE_GRID_NUM;
@@ -78,7 +79,10 @@ export default function Main() {
         console.log(err);
         throw err;
       }
-      setLoading(false);
+      if(basic && ingredient && recipe)
+        setLoading(false);
+      else
+      setLoading(true);
     }
     fetchData();
   }, []);

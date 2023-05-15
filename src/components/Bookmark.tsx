@@ -9,6 +9,8 @@ export default function Bookmark({idx} :{idx: number}) {
     const userInfo = async () => {
       await firestore.collection('users').doc(`${window.localStorage.getItem('EMAIL')}`).get()
       .then((result) => {
+        if(result.data() === undefined) return;
+        
         userRef.current = result.data();
         setIsClicked(userRef.current.bookmark[idx]);
       });
