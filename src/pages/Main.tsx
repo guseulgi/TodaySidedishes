@@ -51,7 +51,7 @@ export default function Main() {
       const basicTmpUrl = `http://211.237.50.150:7080/openapi/${process.env.REACT_APP_API_KEY}/json/${basicGrid}/1/85`;
       try {
 // 기본 정보 불러오기
-        const result = await axios.get(basicTmpUrl, {
+        const result = await axios.get(basicUrl, {
           withCredentials : true,
         });
         if(basicGrid !== undefined){
