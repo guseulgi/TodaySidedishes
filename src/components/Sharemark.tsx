@@ -1,8 +1,21 @@
 import React from 'react'
+import { fetchBasicData } from '../utils/types';
 
-export default function Sharemark() {
+export default function Sharemark({idx, data} :{idx:number, data: fetchBasicData}) {
+
+  const shareKakao = () => {
+    window.Kakao.Link.sendCustom({
+      templateId: 93743,
+      templateArgs: {
+        foodName: `${data.RECIPE_NM_KO}`,
+        foodTime: `${data.COOKING_TIME}`,
+        idx: idx,
+      }
+    });
+  }
+
   return (
-    <ul className='flex justify-center my-8 md:mt-8 md:mb-0'>
+    <ul className='flex justify-center my-8 md:mt-8 md:mb-4'>
       <li className='w-14 h-14 rounded-full bg-[#544D42] mr-7 text-center
         leading-9 text-black-300 text-md
         hover:scale-95 transition duration-150 hover:bg-[#3e3931]
@@ -35,7 +48,7 @@ export default function Sharemark() {
         after:bg-[#544D42] after:w-3 after:h-3 after:block after:bottom-[-0.2rem]
         after:left-1/2 after:translate-x-[-50%] after:absolute after:opacity-0
         hover:after:opacity-100 after:rotate-45'>
-        <button>
+        <button onClick={shareKakao}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" 
             className="w-8 h-8 m-[12px] text-[#544D42]">
             <path fill-rule="evenodd" d="M5.337 21.718a6.707 6.707 0 01-.533-.074.75.75 0 01-.44-1.223 3.73 3.73 0 00.814-1.686c.023-.115-.022-.317-.254-.543C3.274 16.587 2.25 14.41 2.25 12c0-5.03 4.428-9 9.75-9s9.75 3.97 9.75 9c0 5.03-4.428 9-9.75 9-.833 0-1.643-.097-2.417-.279a6.721 6.721 0 01-4.246.997z" clip-rule="evenodd" />

@@ -4,7 +4,7 @@ import {BsGithub} from 'react-icons/bs';
 import {GoMail} from 'react-icons/go';
 import {
   SiTistory, SiTypescript, SiCsharp, SiTailwindcss, SiStyledcomponents,
-  SiMysql, SiMongodb, SiSlack, SiRedux
+  SiMysql, SiMongodb, SiSlack, SiRedux, SiFirebase
 } from 'react-icons/si';
 import {
   DiCss3, DiGit, DiHtml5, DiJsBadge, DiNodejs, DiSass, DiUnitySmall,
@@ -88,6 +88,8 @@ export default function Contact() {
                transition duration-200' />
             <DiNodejs className='w-9 h-9 hover:scale-110 hover:text-green-800
                transition duration-200' />
+            <SiFirebase className='w-7 h-7 hover:scale-110 hover:text-yellow-400
+               transition duration-200 pt-[2px]' />
           </li>
           <li className='my-4 grid grid-cols-8'>
             <DiGit className='w-9 h-9 hover:scale-110 hover:text-gray-600

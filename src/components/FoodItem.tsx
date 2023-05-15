@@ -23,7 +23,7 @@ export default function FoodItem({idx} :{idx:number}) {
               {curData?.RECIPE_NM_KO}</h2>
         </div>
         <p className='ml-12 my-4 text-lg w-5/6 md:w-4/6'>{curData?.SUMRY}</p>
-        <Sharemark />
+        <Sharemark idx={idx} data={curData}/>
       </div>
 
       <ul className='md:w-2/6 w-full md:my-12 my-4 flex justify-between md:block'>

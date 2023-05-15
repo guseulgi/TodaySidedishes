@@ -28,12 +28,16 @@ export default function Info() {
           샘플 데이터는
           <a href="http://211.237.50.150:7080/openapi/sample/xml/Grid_20150827000000000226_1/1/5"
             className='underline text-blue-500 hover:text-purple-700'> 여기</a>
-          에서 확인 가능하며, 레시피 기본정보 / 레시피 재료정보 / 레시피 과정정보 총 3가지의 정보를 요청하여 그렸습니다.
+          에서 확인 가능하며, 레시피 기본정보 / 레시피 재료정보 / 레시피 과정정보 총 3가지의 정보를 REST API를 참고하여 요청 후, 그렸습니다.
         </li>
         <li className='my-4'>
           <span className='text-2xl'>4. </span>
           해당 프로젝트를 하고자 했던 이유는 매번 무슨 요리를 할 지 고민 되어서
           참고할 목적으로 만들게 되었습니다.
+        </li>
+        <li className='my-4'>
+          <span className='text-2xl'>5. </span>
+          덧글 기능을 통해 CRUD 원칙을 공부해보기 위하여 NoSQL인 firebase를 사용하였습니다.
         </li>
       </ul>
     </div>

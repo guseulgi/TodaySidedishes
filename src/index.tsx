@@ -10,6 +10,9 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
+window.Kakao.isInitialized();
+
 root.render(
   <BrowserRouter>
     <RecoilRoot>
