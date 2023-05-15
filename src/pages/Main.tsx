@@ -70,8 +70,13 @@ export default function Main() {
           withCredentials: true,
         });
         if(ingredientGrid !== undefined){
+          console.log('------result',resultSec);
+          console.log(resultSec.data[ingredientGrid]);
+
           if(resultSec.data[ingredientGrid] !== undefined) {
+            console.log(resultSec.data[ingredientGrid]);
             (resultSec && setIngredient(resultSec.data[ingredientGrid].row));
+            console.log(resultSec.data[ingredientGrid].row);
           }
         }
 // 과정 정보 불러오기
