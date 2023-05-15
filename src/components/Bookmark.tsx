@@ -18,11 +18,18 @@ export default function Bookmark({idx} :{idx: number}) {
   }, []);
 
   useEffect(() => {
-    if(userRef.current !== null)
+    if(userRef.current !== null && userRef.current !== undefined)
       setIsClicked(userRef.current.bookmark[idx]);
+    else
+      setIsClicked(false);
   }, [idx]);
   
   const clickBookmark = async () => {
+    if(userRef.current === undefined) {
+      alert('로그인 후 이용이 가능합니다.');
+      return;
+    }
+
     if (userRef.current.bookmark[idx] === undefined) {
       userRef.current.bookmark[idx] = false;
     }

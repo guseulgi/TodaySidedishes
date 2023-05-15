@@ -13,8 +13,8 @@ import {
 
 export default function Contact() {
   return (
-    <div className='w-5/6 lg:w-4/6 mx-auto my-10 font-subMainSec
-      h-[70vh]'>
+    <div className='w-5/6 lg:w-4/6 mx-auto my-14 font-subMainSec
+      '>
       <h2 className='font-main text-4xl mb-2'>Contact</h2>
       <hr className='w-2/3 lg:w-1/3' />
       <h2 className='my-4 '>제작자 - 구슬기</h2>
@@ -65,7 +65,7 @@ export default function Contact() {
         <ul className='mx-1'>
           <li className='my-4 grid grid-cols-8'>
             <DiHtml5 className=' w-7 h-7 hover:scale-110 hover:text-red-700
-               transition duration-200'/>
+               transition duration-200' />
             <DiCss3 className=' w-7 h-7 hover:scale-110 hover:text-blue-800
               transition duration-200' />
             <DiSass className='w-7 h-7 hover:scale-110 hover:text-pink-600

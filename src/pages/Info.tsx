@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Info() {
   return (
-    <div className='w-4/6 mx-auto h-[75vh]'>
+    <div className='w-4/6 mx-auto'>
       <h2 className='text-[2.5rem] font-main
          text-center mt-12'>
         Kitchen's 는  

@@ -28,6 +28,14 @@ export default function FoodReviewInput({idx, reviewList, setReRender}
   }, [clickIdx]);
 
   const clickSubmit = async () => {
+    if(window.localStorage.getItem('USER') === null) {
+      alert('로그인 후 이용이 가능합니다.');
+
+      if(contentRef.current !== null)
+        contentRef.current.value = '';
+      return;
+    }
+
     if(contentRef.current?.value === '' || contentRef.current === undefined) return;
     
     const newReview = {
@@ -66,7 +74,9 @@ export default function FoodReviewInput({idx, reviewList, setReRender}
     <div className='pt-6 mb-16 border-t-[1px]'>
       <div className='lg:block flex w-full my-3 ml-2'>
         <h6 className='text-sm font-bold my-auto flex-1 ml-1'>
-          {window.localStorage.getItem('USER')}
+          {window.localStorage.getItem('USER') === null 
+          ? '로그인이 필요합니다.' 
+          : window.localStorage.getItem('USER')}
         </h6>
         <div className='flex lg:my-2'>
           {isClickedStar.map((el, idx) => {

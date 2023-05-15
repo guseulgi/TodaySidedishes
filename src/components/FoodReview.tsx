@@ -42,6 +42,11 @@ export default function FoodReview({idx}:{idx:number}) {
   }
 
   const clickGoodBtn = async (index :number) => {
+    if(window.localStorage.getItem('USER') === null) {
+      alert('로그인 후  이용이 가능합니다.');
+      return;
+    }
+
     let findComment = reviewDataRow.current?.coments.find((el :any, reviewIdx :number) => reviewIdx === index);
     findComment.goodCounts += 1;
     reviewDataRow.current.coments[index] = findComment;
