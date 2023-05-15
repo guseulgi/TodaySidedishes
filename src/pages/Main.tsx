@@ -54,7 +54,11 @@ export default function Main() {
         });
         if(basicGrid !== undefined){
           if(result.data[basicGrid] !== undefined) {
+            console.log('------result',result);
+            console.log(result.data[basicGrid]);
+            console.log(result.data[basicGrid].row);
             (result && setBasic(result.data[basicGrid].row));
+            console.log(basic, '-------------basic');
           }
         }
 // 재료 정보 불러오기
@@ -82,7 +86,7 @@ export default function Main() {
       if(basic && ingredient && recipe)
         setLoading(false);
       else
-      setLoading(true);
+        setLoading(true);
     }
     fetchData();
   }, []);
