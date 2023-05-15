@@ -47,9 +47,11 @@ export default function Main() {
       const basicUrl = `/openapi/${process.env.REACT_APP_API_KEY}/json/${basicGrid}/1/85`;
       const ingredientUrl = `/openapi/${process.env.REACT_APP_API_KEY}/json/${ingredientGrid}/1/999`;
       const recipeUrl = `/openapi/${process.env.REACT_APP_API_KEY}/json/${recipeGrid}/1/470`;
+      
+      const basicTmpUrl = `http://211.237.50.150:7080/openapi/${process.env.REACT_APP_API_KEY}/json/${basicGrid}/1/85`;
       try {
 // 기본 정보 불러오기
-        const result = await axios.get(basicUrl,{
+        const result = await axios.get(basicTmpUrl, {
           withCredentials : true,
         });
         if(basicGrid !== undefined){
