@@ -52,6 +52,7 @@ export default function Main() {
           withCredentials : true,
         });
         if(basicGrid !== undefined){
+          console.log(result.data[basicGrid].row);
           setBasic(result.data[basicGrid].row);
         }
 // 재료 정보 불러오기
