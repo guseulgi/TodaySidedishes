@@ -52,22 +52,21 @@ export default function Main() {
           withCredentials : true,
         });
         if(basicGrid !== undefined){
-          console.log(result.data[basicGrid].row);
-          setBasic(result.data[basicGrid].row);
+          (result && setBasic(result.data[basicGrid].row));
         }
 // 재료 정보 불러오기
         const resultSec = await axios.get(ingredientUrl, {
           withCredentials: true,
         });
         if(ingredientGrid !== undefined){
-          setIngredient(resultSec.data[ingredientGrid].row);
+          (resultSec && setIngredient(resultSec.data[ingredientGrid].row));
         }
 // 과정 정보 불러오기
         const resultThir = await axios.get(recipeUrl, {
           withCredentials: true,
         });
         if(recipeGrid !== undefined) {
-          setRecipe(resultThir.data[recipeGrid].row);
+          (resultThir && setRecipe(resultThir.data[recipeGrid].row));
         }
       } catch(err) {
         console.log(err);
