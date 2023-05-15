@@ -53,9 +53,11 @@ export default function Main() {
           withCredentials : true,
         });
         if(basicGrid !== undefined){
+          console.log('------result',result);
+          console.log(result.data[basicGrid]);
           if(result.data[basicGrid] !== undefined) {
-            console.log('------result',result);
-            console.log(result.data[basicGrid]);
+
+
             console.log(result.data[basicGrid].row);
             (result && setBasic(result.data[basicGrid].row));
             console.log(basic, '-------------basic');
