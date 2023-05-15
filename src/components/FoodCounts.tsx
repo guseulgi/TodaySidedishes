@@ -1,6 +1,4 @@
 import React from 'react'
-import { useSetRecoilState } from 'recoil';
-import { curIndex } from '../atom/food';
 import { useNavigate } from 'react-router-dom';
 
 export default function FoodCounts({idx} :{idx: number}) {

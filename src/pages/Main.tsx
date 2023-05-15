@@ -5,7 +5,6 @@ import { basicData, ingredientData, recipeData, reviewData } from '../atom/food'
 import axios from 'axios';
 import Loading from './Loading';
 import { useNavigate, useParams } from 'react-router-dom';
-import { firestore } from '../firebase';
 
 export default function Main() {
   const { foodId } = useParams();
@@ -77,23 +76,6 @@ export default function Main() {
     }
     fetchData();
   }, []);
-
-  // useEffect(() => {
-  //   // 덧글
-  //   const firestoreCommentData = async () => {
-  //     await firestore.collection('comment').doc(foodId).get()
-  //     .then((result) => {
-  //       if(foodId !== undefined) {
-  //         tmpArr[parseInt(foodId)] = result.data();
-  //       }
-  //     });
-  //     setReviewDataRow(tmpArr);
-
-  //     setLoading(false);
-  //   }
-  
-  //   firestoreCommentData();
-  // }, [foodId]);
 
   if(loading) return <Loading />;
 
