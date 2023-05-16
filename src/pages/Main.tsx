@@ -45,14 +45,14 @@ export default function Main() {
       const recipeGrid = process.env.REACT_APP_RECEIPE_GRID_NUM;
 
       // Dev - Proxy
-      // const basicUrl = `/openapi/${process.env.REACT_APP_API_KEY}/json/${basicGrid}/1/85`;
-      // const ingredientUrl = `/openapi/${process.env.REACT_APP_API_KEY}/json/${ingredientGrid}/1/999`;
-      // const recipeUrl = `/openapi/${process.env.REACT_APP_API_KEY}/json/${recipeGrid}/1/470`;
+      const basicUrl = `/openapi/${process.env.REACT_APP_API_KEY}/json/${basicGrid}/1/85`;
+      const ingredientUrl = `/openapi/${process.env.REACT_APP_API_KEY}/json/${ingredientGrid}/1/999`;
+      const recipeUrl = `/openapi/${process.env.REACT_APP_API_KEY}/json/${recipeGrid}/1/470`;
 
       // Build
-      const basicUrl = `https://cors-anywhere.herokuapp.com/http://211.237.50.150:7080/openapi/${process.env.REACT_APP_API_KEY}/json/${basicGrid}/1/85`;
-      const ingredientUrl = `https://cors-anywhere.herokuapp.com/http://211.237.50.150:7080/openapi/${process.env.REACT_APP_API_KEY}/json/${ingredientGrid}/1/999`;
-      const recipeUrl = `https://cors-anywhere.herokuapp.com/http://211.237.50.150:7080/openapi/${process.env.REACT_APP_API_KEY}/json/${recipeGrid}/1/470`;
+      // const basicUrl = `https://cors-anywhere.herokuapp.com/http://211.237.50.150:7080/openapi/${process.env.REACT_APP_API_KEY}/json/${basicGrid}/1/85`;
+      // const ingredientUrl = `https://cors-anywhere.herokuapp.com/http://211.237.50.150:7080/openapi/${process.env.REACT_APP_API_KEY}/json/${ingredientGrid}/1/999`;
+      // const recipeUrl = `https://cors-anywhere.herokuapp.com/http://211.237.50.150:7080/openapi/${process.env.REACT_APP_API_KEY}/json/${recipeGrid}/1/470`;
 
       try {
 // 기본 정보 불러오기
