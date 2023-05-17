@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import FoodList from '../components/FoodList';
-import {  useRecoilState, useSetRecoilState } from 'recoil';
+import {  useRecoilState } from 'recoil';
 import { basicData, ingredientData, recipeData, reviewData } from '../atom/food';
 import axios from 'axios';
 import Loading from './Loading';

@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Loading() {
   return (
-    <section className='bg-[#FFF6ED] mb-7'>
+    <section className='bg-[#FFF6ED]'>
       <div className='w-4/6 py-24 text-center mx-auto'>
         <div className='w-52 h-52 block mx-auto mb-5' style={{
           backgroundImage: 'url("./images/source/famer.png")',

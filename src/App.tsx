@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       <Header />
-      {isMMenuRow && <MMenu />} {/* <- 모바일 메뉴 특정 크기 이상일 때 사라지게 TODO */}
+      {isMMenuRow && <MMenu />}
       <Routes>
         <Route path='/' element={<Main />} >
           <Route path='/:foodId' element={<FoodList />} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { useRecoilState } from 'recoil';
 import { allUsers } from '../atom/user';
 import { User } from '../utils/types';
@@ -10,6 +10,7 @@ export default function MyPage() {
 
   const [users, setUsers] = useRecoilState(allUsers);
 
+  // 유저 정보 가져와서 변경해줘야함 TODO
   const getUserInfo = () => {
     let user :any;
     user = users.find((el :User) => {

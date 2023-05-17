@@ -1,11 +1,5 @@
 import { atom } from "recoil";
 
-// 음식 인덱스
-export const curIndex = atom({
-  key: 'current index',
-  default: Math.floor(Math.random() * 85),
-});
-
 // 인덱스에 따른 레시피 기본정보
 export const basicData = atom({
   key: 'basic data',
