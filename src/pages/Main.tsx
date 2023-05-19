@@ -38,8 +38,9 @@ export default function Main() {
 
   useEffect(() => {
     setLoading(true);
-
+    // 직접 공공 API 불러오는 함수
     const fetchData = async () => {
+
       const basicGrid = process.env.REACT_APP_BASIC_GRID_NUM;
       const ingredientGrid = process.env.REACT_APP_INGREDIENT_GRID_NUM;
       const recipeGrid = process.env.REACT_APP_RECEIPE_GRID_NUM;
@@ -60,11 +61,7 @@ export default function Main() {
           withCredentials : true,
         });
         if(basicGrid !== undefined){
-          console.log('------result',result);
-          console.log(result.data[basicGrid]);
           if(result.data[basicGrid] !== undefined) {
-
-
             console.log(result.data[basicGrid].row);
             (result && setBasic(result.data[basicGrid].row));
             console.log(basic, '-------------basic');
@@ -103,6 +100,26 @@ export default function Main() {
         setLoading(true);
     }
     fetchData();
+
+// console.log('데이터1212');
+//     const fetchServerData = async () => {
+//       try {
+//         const serverUrl = '/';
+//         const result = await axios.get(serverUrl, {
+//           withCredentials: true,
+//         });
+        
+//         console.log(result);
+//         const fetch = JSON.stringify(result);
+//         console.log(fetch);
+
+//         console.log('데이터');
+//       } catch (err) {
+//         console.log(err);
+//         throw err;
+//       }
+//     }
+//     fetchServerData();
   }, []);
 
   if(loading) return <Loading />;
