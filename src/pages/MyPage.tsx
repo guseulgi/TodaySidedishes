@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useRecoilState } from 'recoil';
 import { allUsers } from '../atom/user';
 import { User } from '../utils/types';
 
 export default function MyPage() {
+  const nicknameRef = useRef<HTMLInputElement>(null);
 
   const iconStyle = 'identicon';
   const iconSource = `https://api.dicebear.com/6.x/${iconStyle}/svg?seed=${window.localStorage.getItem("USER")}`;
@@ -29,8 +30,17 @@ export default function MyPage() {
   }, []);
 
   const nicknameChange = () => {
+    if(nicknameRef.current?.value === '') return;
+
     // 파이어스토어에 닉네임 바로 변경
+    if(window.confirm(`현재 닉네임은 ${window.localStorage.getItem('USER')} 입니다. \n정말로 ${nicknameRef.current?.value}로 변경하시겠습니까?`)) {
+      
+    }
+    
+    
   }
+
+  
 
   return (
     <div className='w-2/3 md:w-5/6 lg:w-2/3 mx-auto mb-16'>
@@ -65,11 +75,12 @@ export default function MyPage() {
             </li>
             <li className='mb-4 flex justify-between align-middle'>
               <p className='w-24 leading-10 '>닉네임</p>
-              <input type="text" placeholder='닉네임 변경'
+              <input ref={nicknameRef} type="text" placeholder='닉네임 변경'
                 className='py-2 px-3 border-[1px] flex-1'/>
               <button className='py-2 px-4 rounded-lg bg-[#7B8F9E]
                 ml-2 text-white hover:scale-95 hover:bg-[#536F7D] 
-                transition duration-200'>변경</button>
+                transition duration-200'
+                onClick={nicknameChange}>변경</button>
             </li>
             <li className='mb-2 flex justify-between align-middle'>
               <p className='w-24 leading-10'>비밀번호</p>
