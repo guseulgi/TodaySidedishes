@@ -1,46 +1,85 @@
-import React, { useEffect, useRef } from 'react'
-import { useRecoilState } from 'recoil';
-import { allUsers } from '../atom/user';
-import { User } from '../utils/types';
+import React, { useRef, useState } from 'react'
+import { firestore } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 export default function MyPage() {
+  const navigator = useNavigate();
   const nicknameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const passwordConfirmRef = useRef<HTMLInputElement>(null);
+  const [rerender, setRerender] = useState<boolean>(false);
 
   const iconStyle = 'identicon';
   const iconSource = `https://api.dicebear.com/6.x/${iconStyle}/svg?seed=${window.localStorage.getItem("USER")}`;
 
-  const [users, setUsers] = useRecoilState(allUsers);
-
-  // 유저 정보 가져와서 변경해줘야함 TODO
-  const getUserInfo = () => {
-    let user :any;
-    user = users.find((el :User) => {
-      const email = window.localStorage.getItem('EMAIL');
-      if(el.email === email) {
-        return el;
-      }
-    });
-
-    if(user !== undefined)
-      return user;
-  }
-
-  useEffect(() => {
-
-  }, []);
-
   const nicknameChange = () => {
     if(nicknameRef.current?.value === '') return;
+    let newNickname :any = null;
 
     // 파이어스토어에 닉네임 바로 변경
     if(window.confirm(`현재 닉네임은 ${window.localStorage.getItem('USER')} 입니다. \n정말로 ${nicknameRef.current?.value}로 변경하시겠습니까?`)) {
-      
+      firestore.collection('users').get().then((result) => {
+        result.forEach((doc) => {
+          if(doc.data().nickname === window.localStorage.getItem('USER')) {
+            newNickname = {
+              ...doc.data(),
+              nickname: `${nicknameRef.current?.value}`,
+            }
+
+            firestore.collection('users').doc(`${newNickname.email}`).set(newNickname);
+            console.log('닉네임 변경완료');
+            setRerender(true);
+            window.localStorage.setItem('USER', `${newNickname.nickname}`);
+
+            if(nicknameRef.current !== null) nicknameRef.current.value = '';
+          }
+        })
+      });
+      if(newNickname === null) return;
     }
-    
-    
   }
 
-  
+  const passwordChange = () => {
+    if(passwordRef.current?.value === '' || passwordConfirmRef.current?.value === '') return;
+    let newPassword :any = null;
+
+    if(passwordRef.current?.value !== passwordConfirmRef.current?.value) {
+      alert('비밀번호 확인란이 일치하지 않습니다.');
+      if(passwordRef.current !== null)
+        passwordRef.current.value = '';
+
+      if(passwordConfirmRef.current !== null)
+        passwordConfirmRef.current.value = '';
+      
+      return;
+    }
+
+    // 파이어스토어에 비밀번호 바로 변경
+    if(window.confirm(`정말로 비밀번호를 변경하시겠습니까?`)) {
+      firestore.collection('users').get().then((result) => {
+        result.forEach((doc) => {
+          if(doc.data().nickname === window.localStorage.getItem('USER')) {
+            newPassword = {
+              ...doc.data(),
+              password: `${passwordRef.current?.value}`,
+            }
+
+            firestore.collection('users').doc(`${newPassword.email}`).set(newPassword);
+
+            if(passwordRef.current !== null)
+              passwordRef.current.value = '';
+    
+            if(passwordConfirmRef.current !== null)
+              passwordConfirmRef.current.value = '';
+            
+            alert('성공적으로 비밀번호가 바뀌었습니다.');
+            navigator('/');
+          }
+        })
+      });
+      if(newPassword === null) return;
+    }
+  }
 
   return (
     <div className='w-2/3 md:w-5/6 lg:w-2/3 mx-auto mb-16'>
@@ -83,19 +122,20 @@ export default function MyPage() {
                 onClick={nicknameChange}>변경</button>
             </li>
             <li className='mb-2 flex justify-between align-middle'>
-              <p className='w-24 leading-10'>비밀번호</p>
-              <input type="text" placeholder='비밀번호 변경'
+              <p className='w-24 leading-10'>바꿀 비밀번호</p>
+              <input type="password" placeholder='비밀번호 변경' ref={passwordRef}
                 className='py-2 px-3 border-[1px] flex-1'/>
               <p className='opacity-0 py-2 px-4 rounded-lg bg-[#536F7D]
                 ml-2'>확인</p>
             </li>
             <li className='mb-4 flex justify-between align-middle'>
               <p className='w-24 leading-10'>비밀번호 확인</p>
-              <input type="text" placeholder='비밀번호 확인'
+              <input type="password" placeholder='비밀번호 확인' ref={passwordConfirmRef}
                 className='py-2 px-3 border-[1px] flex-1'/>
               <button className='py-2 px-4 rounded-lg bg-[#7B8F9E]
                 ml-2 text-white hover:scale-95 hover:bg-[#536F7D] 
-                transition duration-200'>변경</button>
+                transition duration-200'
+                onClick={passwordChange}>변경</button>
             </li>
           </ul>
         </div>
