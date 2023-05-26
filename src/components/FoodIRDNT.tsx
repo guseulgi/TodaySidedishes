@@ -40,7 +40,7 @@ export default function FoodIRDNT({idx} :{idx: number}) {
       <div className=''>
       <h5 className='px-3 py-1 bg-[#544D42] text-white
                 rounded-2xl mx-2 text-center'>주재료</h5>
-        {mainIRDNT.map((el) => {
+        {mainIRDNT.length !== 0 ? mainIRDNT.map((el) => {
           return (
             <div>
               <ul className='flex my-1 leading-8 text-center'>
@@ -52,15 +52,21 @@ export default function FoodIRDNT({idx} :{idx: number}) {
               </ul>
             </div>
           )
-        })}
+        }) : <div>
+            <ul className='flex my-1 leading-8 text-center'>
+              <li className='m-1 flex-1 font-subMainSec
+                text-sm md:text-lg leading-8 text-[#323e44]'>
+                  주재료가 필요하지 않아요!
+              </li>
+            </ul>
+        </div>}
       </div>
       <div>
       <h5 className='px-3 py-1 bg-[#536F7D] text-white
                 rounded-2xl mx-2 text-center'>부재료</h5>
-      {subIRDNT.map((el) => {
+      {subIRDNT.length !== 0 ? subIRDNT.map((el) => {
           return (
             <div>
-
               <ul className='flex my-1 leading-8 text-center'>
                 <li className='m-1 flex-1 font-subMainSec
                   text-md md:text-xl leading-8 text-[#323e44]'>
@@ -70,12 +76,19 @@ export default function FoodIRDNT({idx} :{idx: number}) {
               </ul>
             </div>
           )
-        })}
+        }) : <div>
+          <ul className='flex my-1 leading-8 text-center'>
+                <li className='m-1 flex-1 font-subMainSec
+                  text-sm md:text-lg leading-8 text-[#323e44]'>
+                    부재료가 필요하지 않아요!
+                </li>
+              </ul>
+        </div>}
       </div>
       <div>
       <h5 className='px-3 py-1 bg-[#E8B465] text-gray-700
                 rounded-2xl mx-2 text-center'>양념</h5>
-      {spicyIRDNT.map((el) => {
+      {spicyIRDNT.length !== 0 ? spicyIRDNT.map((el) => {
           return (
             <div>
               <ul className='flex my-1 leading-8 text-center'>
@@ -87,7 +100,14 @@ export default function FoodIRDNT({idx} :{idx: number}) {
               </ul>
             </div>
           )
-        })}
+        }) : <div>
+            <ul className='flex my-1 leading-8 text-center'>
+              <li className='m-1 flex-1 font-subMainSec
+                text-sm md:text-lg leading-8 text-[#323e44]'>
+                  양념 재료가 필요하지 않아요!
+              </li>
+            </ul>
+        </div>}
       </div>
     </div>
   )

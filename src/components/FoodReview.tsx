@@ -43,7 +43,7 @@ export default function FoodReview({idx}:{idx:number}) {
 
   const clickGoodBtn = async (index :number) => {
     if(window.localStorage.getItem('USER') === null) {
-      alert('로그인 후  이용이 가능합니다.');
+      alert('로그인 후 이용이 가능합니다.');
       return;
     }
 
@@ -100,11 +100,16 @@ export default function FoodReview({idx}:{idx:number}) {
                   <li className='flex mr-7 text-gray-400 my-auto
                     text-sm'>
                     <button >
-                      {el.user.nickname === window.localStorage.getItem('USER') ? null 
+                      {el.user.nickname === window.localStorage.getItem('USER')
+                      ? <FaThumbsUp className='text-blue-500' /> 
                       : <FaThumbsUp className='hover:text-blue-500' 
                           onClick={() => clickGoodBtn(index)}/>}
                     </button> 
-                      {el.user.nickname === window.localStorage.getItem('USER') ? null 
+                      {el.user.nickname === window.localStorage.getItem('USER')
+                      ? <>
+                        <span className='ml-2' >{el.goodCounts}</span>
+                        <p className='mx-2 text-xs text-gray-200 my-auto'> | </p>
+                      </> 
                       : <>
                         <span className='ml-2' >{el.goodCounts}</span>
                         <p className='mx-2 text-xs text-gray-200 my-auto'> | </p>
