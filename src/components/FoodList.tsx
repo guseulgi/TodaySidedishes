@@ -9,6 +9,7 @@ import FoodCounts from './FoodCounts';
 import { useParams } from 'react-router-dom';
 import NotFound from '../pages/NotFound';
 import FoodReview from './FoodReview';
+import FoodItemSkeleton from './FoodItemSkeleton';
 
 export default function FoodList() {
   const { foodId } = useParams();
@@ -44,7 +45,7 @@ export default function FoodList() {
         </svg>
         오늘의 추천 요리
       </h2>
-      {basic && <FoodItem idx={idx} />}
+      {!basic ? <FoodItem idx={idx} /> : <FoodItemSkeleton />}
       <FoodCounts idx={idx} />
       {ingredient && <FoodIRDNT idx={idx} />}
       {recipe && <FoodRecipe idx={idx} />}
